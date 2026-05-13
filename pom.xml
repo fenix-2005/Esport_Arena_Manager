@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.EsportManager</groupId>
-	<artifactId>Esport_Arena_Manger</artifactId>
+	<artifactId>Esport_Arena_Manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>
@@ -50,5 +50,21 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<packaging>pom</packaging>
+	<modules>
+		<module>Team-service</module>
+		<module>Tournament-service</module>
+		<module>User-service</module>
+		<module>Game-service</module>
+		<module>Auth-service</module>
+		<module>Sanction-Service</module>
+		<module>Match-Service</module>
+		<module>Notification-Service</module>
+		<module>Prize-Service</module>
+		<module>Ranking-Service</module>
+		<module>Registration-Service</module>
+		<module>Result-Service</module>
+	</modules>
 
 </project>
