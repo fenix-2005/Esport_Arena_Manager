@@ -23,11 +23,11 @@ public class Notificacion {
     private long Id;
 
     @NotNull(message = "Campo UserID no puede estar vacio")
-    @Column (name = "UserId")
+    @Column (name = "User_id")
     private Long UserId;
 
     @NotNull (message = "Campo EquipoId no puede estar vacio")
-    @Column (name = "EquipoId")
+    @Column (name = "Equipo_id")
     private  Long EquipoId;
 
     @NotNull (message = "Campo Tipo no puede estar vacio")

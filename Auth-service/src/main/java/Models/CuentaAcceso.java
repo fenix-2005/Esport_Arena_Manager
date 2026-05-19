@@ -39,7 +39,7 @@ public class CuentaAcceso {
     private String Estado;
 
     @NotNull (message = "Campo fechaCreacion no puede estar vacio")
-    @Column (name = "fechaCreacion")
+    @Column (name = "fecha_creacion")
     private Date fechaCreacion;
 
 

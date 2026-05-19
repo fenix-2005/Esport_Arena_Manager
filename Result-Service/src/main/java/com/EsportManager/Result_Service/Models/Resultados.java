@@ -1,4 +1,4 @@
-package com.Esport_manager.Tournament_service.Models;
+package com.EsportManager.Result_Service.Models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,46 +9,46 @@ import lombok.ToString;
 import java.util.Date;
 
 @Entity
-@Table(name = "Torneo")
+@Table(name = "Resultados")
 @Getter
 @Setter
 @NamedEntityGraph
 @ToString
 
-public class Torneo {
+public class Resultados {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
     private long Id;
 
-    @NotNull(message = "Campo Nombre no puede estar vacio")
-    @Column (name = "Nombre")
-    private String Nombre;
+    @NotNull(message = "Campo PartidaId no puede estar vacio")
+    @Column (name = "Partida_id")
+    private Long PartidaId;
 
-    @NotNull(message = "Campo JuegoId no puede estar vacio")
-    @Column (name = "Juego_id")
-    private long JuegoId;
+    @NotNull(message = "Campo GanadorId no puede estar vacio")
+    @Column (name = "Ganador_id")
+    private long GanadorId;
 
     @NotNull(message = "Campo FechaInicio no puede estar vacio")
     @Column (name = "Fecha_inicio")
-    private Date FechaInicio;
+    private int PuntajeA;
 
     @NotNull(message = "Campo FechaFin no puede estar vacio")
     @Column (name = "Fecha_fin")
-    private Date FechaFin;
+    private int PuntajeB;
 
     @NotNull(message = "Campo CupoMaximo no puede estar vacio")
     @Column (name = "Cupo_maximo")
     private int CupoMaximo;
 
-    @NotNull(message = "Campo Estado no puede estar vacio")
-    @Column (name = "Estado")
-    private boolean estado;
+    @NotNull(message = "Campo EstadoValidacion no puede estar vacio")
+    @Column (name = "Estado_validacion")
+    private boolean estadoValidacion;
 
-    @NotNull(message = "Campo Modalidad no puede estar vacio")
-    @Column (name = "Modalidad")
-    private String Modalidad;
+    @NotNull(message = "Campo FechaRegistro no puede estar vacio")
+    @Column (name = "Fecha_registro")
+    private Date FechaRegistro;
 
     @Embedded
     Audit audit = new Audit();

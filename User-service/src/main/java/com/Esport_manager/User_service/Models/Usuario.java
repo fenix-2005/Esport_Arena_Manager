@@ -44,7 +44,7 @@ public class Usuario {
     private String Estado;
 
     @NotNull (message = "Campo fechaRegistro no puede estar vacio")
-    @Column (name = "fechaRegistro")
+    @Column (name = "fecha_registro")
     private Date fechaRegistro;
 
 
