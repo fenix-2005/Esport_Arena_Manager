@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class Audit {
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

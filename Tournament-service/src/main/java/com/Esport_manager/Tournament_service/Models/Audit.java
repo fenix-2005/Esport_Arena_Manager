@@ -1,4 +1,4 @@
-package Models;
+package com.Esport_manager.Tournament_service.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
+
 public class Audit {
+
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -35,6 +38,7 @@ public class Audit {
      * Este método se ejecuta automaticamente cuando se realiza cualquier actu
      * lización del objeto que se encuentra asociado.
      */
+
     @PreUpdate
     public void preUpdate(){
         this.updatedAt = LocalDateTime.now();

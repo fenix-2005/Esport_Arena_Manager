@@ -1,4 +1,5 @@
-package Models;
+package com.Esport_manager.User_service.Models;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

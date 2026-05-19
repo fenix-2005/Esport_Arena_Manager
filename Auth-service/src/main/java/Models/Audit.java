@@ -10,12 +10,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-
 @Embeddable
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
+
 public class Audit {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -27,7 +27,7 @@ public class Audit {
      * Este método se ejecuta automaticamente una vez que el objeto es creado
      */
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
 
@@ -35,8 +35,11 @@ public class Audit {
      * Este método se ejecuta automaticamente cuando se realiza cualquier actu
      * lización del objeto que se encuentra asociado.
      */
+
     @PreUpdate
-    public void preUpdate(){
+    public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
 }
+

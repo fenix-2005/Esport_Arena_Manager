@@ -23,23 +23,23 @@ public class Partida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    long Id;
+    private long Id;
 
     @NotNull (message = "Campo torneo_id no puede estar vacio")
     @Column (name = "torneo_Id")
-    long torneoId;
+    private long torneoId;
 
     @NotNull(message = "Campo Participante_A_Id no puede estar vacio")
     @Column (name = "Participante_A_Id")
-    long participanteAId;
+    private long participanteAId;
 
     @NotNull(message = "Campo Participante_B_Id no puede estar vacio")
     @Column (name = "Participante_B_Id")
-    long participanteBId;
+    private long participanteBId;
 
     @NotNull(message = "Campo Ronda no puede estar vacio")
     @Column (name = "Ronda")
-    int ronda;
+    private int ronda;
 
     @NotNull(message = "Campo Fecha_Hora no puede estar vacio")
     @Column (name = "Fecha_Hora")
