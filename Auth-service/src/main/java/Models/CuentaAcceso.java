@@ -19,24 +19,24 @@ public class CuentaAcceso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Id")
-    private long Id;
+    @Column(name="id")
+    private Long id;
 
     @NotNull(message = "Campo Email no puede estar vacio")
     @Column (name = "Email")
-    private String Email;
+    private String email;
 
     @NotNull (message = "Campo Password no puede estar vacio")
     @Column (name = "Password")
-    private  String Password;
+    private String password;
 
     @NotNull (message = "Campo Rol no puede estar vacio")
     @Column (name = "Rol")
-    private String Rol;
+    private String rol;
 
     @NotNull (message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")
-    private String Estado;
+    private String estado;
 
     @NotNull (message = "Campo fechaCreacion no puede estar vacio")
     @Column (name = "fecha_creacion")

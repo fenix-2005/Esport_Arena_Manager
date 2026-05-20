@@ -20,19 +20,19 @@ public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo Nombre no puede estar vacio")
     @Column (name = "Nombre")
-    private String Nombre;
+    private String nombre;
 
     @NotNull(message = "Campo CapitanId no puede estar vacio")
     @Column (name = "Capitan_id")
-    private long CapitanId;
+    private Long capitanId;
 
     @NotNull(message = "Campo JuegoPrincipalId no puede estar vacio")
     @Column (name = "Juego_principal_id")
-    private long JuegoPrincipalId;
+    private Long juegoPrincipalId;
 
 
     @NotNull(message = "Campo Estado no puede estar vacio")

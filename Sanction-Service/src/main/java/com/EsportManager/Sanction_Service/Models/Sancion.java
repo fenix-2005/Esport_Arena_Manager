@@ -20,36 +20,36 @@ public class Sancion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo UsuarioId no puede estar vacio")
     @Column (name = "Usuario_id")
-    private long UsuarioId;
+    private Long usuarioId;
 
     @NotNull (message = "Campo EquipoId no puede estar vacio")
     @Column (name = "Equipo_id")
-    private long EquipoId;
+    private Long equipoId;
 
     @NotNull(message = "Campo Motivo no puede estar vacio")
     @Column (name = "Motivo")
-    private String Motivo;
+    private String motivo;
 
 
     @NotNull (message = "Campo FechaInicio no puede estar vacio")
     @Column (name = "Fecha_inicio")
-    private Date FechaInicio;
+    private Date fechaInicio;
 
     @NotNull (message = "Campo FechaFin no puede estar vacio")
     @Column (name = "Fecha_fin")
-    private Date FechaFin;
+    private Date fechaFin;
 
     @NotNull (message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")
-    private String Estado;
+    private String estado;
 
     @NotNull (message = "Campo Severida no puede estar vacio")
     @Column (name = "Severida")
-    private String Severida;
+    private String severida;
 
 
     @Embedded

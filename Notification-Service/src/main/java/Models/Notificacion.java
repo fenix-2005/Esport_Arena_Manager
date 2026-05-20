@@ -20,31 +20,31 @@ public class Notificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo UserID no puede estar vacio")
     @Column (name = "User_id")
-    private Long UserId;
+    private Long userId;
 
     @NotNull (message = "Campo EquipoId no puede estar vacio")
     @Column (name = "Equipo_id")
-    private  Long EquipoId;
+    private  Long equipoId;
 
     @NotNull (message = "Campo Tipo no puede estar vacio")
     @Column (name = "Tipo")
-    private String Tipo;
+    private String tipo;
 
 
     @Column (name = "Mensaje")
-    private String Mensaje;
+    private String mensaje;
 
 
     @Column (name = "Leida")
-    private Boolean Leida;
+    private Boolean leida;
 
     @NotNull (message = "Campo Fecha no puede estar vacio")
     @Column (name = "Fecha")
-    private Date Fecha;
+    private Date fecha;
 
 
     @Embedded

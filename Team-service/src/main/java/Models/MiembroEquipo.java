@@ -20,19 +20,19 @@ public class MiembroEquipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo EquipoId no puede estar vacio")
     @Column (name = "Equipo_id")
-    private long EquipoId;
+    private Long equipoId;
 
     @NotNull(message = "Campo UsuarioId no puede estar vacio")
     @Column (name = "Usuario_id")
-    private long UsuarioId;
+    private Long usuarioId;
 
     @NotNull(message = "Campo RolEquipo no puede estar vacio")
     @Column (name = "Rol_equipo")
-    private long RolEquipo;
+    private Long rolEquipo;
 
 
     @Embedded

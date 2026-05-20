@@ -20,32 +20,32 @@ public class Inscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo TorneoId no puede estar vacio")
     @Column (name = "Torneo_id")
-    private long TorneoId;
+    private Long torneoId;
 
     @NotNull (message = "Campo EquipoId no puede estar vacio")
     @Column (name = "Equipo_id")
-    private long EquipoId;
+    private Long equipoId;
 
     @NotNull(message = "Campo JugadorId no puede estar vacio")
     @Column (name = "Jugador_id")
-    private long JugadorId;
+    private Long jugadorId;
 
 
     @NotNull (message = "Campo  TipoParticipante no puede estar vacio")
     @Column (name = "Tipo_participante")
-    private String  TipoParticipante;
+    private String  tipoParticipante;
 
     @NotNull (message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")
-    private String Estado;
+    private String estado;
 
     @NotNull (message = "Campo  FechaInscripcion no puede estar vacio")
     @Column (name = " Fecha_inscripcion")
-    private Date  FechaInscripcion;
+    private Date  fechaInscripcion;
 
 
     @Embedded

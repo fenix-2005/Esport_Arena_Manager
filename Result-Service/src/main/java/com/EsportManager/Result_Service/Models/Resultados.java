@@ -20,27 +20,27 @@ public class Resultados {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo PartidaId no puede estar vacio")
     @Column (name = "Partida_id")
-    private Long PartidaId;
+    private Long partidaId;
 
     @NotNull(message = "Campo GanadorId no puede estar vacio")
     @Column (name = "Ganador_id")
-    private long GanadorId;
+    private Long ganadorId;
 
     @NotNull(message = "Campo FechaInicio no puede estar vacio")
     @Column (name = "Fecha_inicio")
-    private int PuntajeA;
+    private int puntajeA;
 
     @NotNull(message = "Campo FechaFin no puede estar vacio")
     @Column (name = "Fecha_fin")
-    private int PuntajeB;
+    private int puntajeB;
 
     @NotNull(message = "Campo CupoMaximo no puede estar vacio")
     @Column (name = "Cupo_maximo")
-    private int CupoMaximo;
+    private int cupoMaximo;
 
     @NotNull(message = "Campo EstadoValidacion no puede estar vacio")
     @Column (name = "Estado_validacion")
@@ -48,7 +48,7 @@ public class Resultados {
 
     @NotNull(message = "Campo FechaRegistro no puede estar vacio")
     @Column (name = "Fecha_registro")
-    private Date FechaRegistro;
+    private Date fechaRegistro;
 
     @Embedded
     Audit audit = new Audit();

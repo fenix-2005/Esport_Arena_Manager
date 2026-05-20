@@ -20,35 +20,35 @@ public class Ranking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo TorneoId no puede estar vacio")
     @Column (name = "Torneo_id")
-    private long TorneoId;
+    private Long torneoId;
 
     @NotNull (message = "Campo ParticipanteId no puede estar vacio")
     @Column (name = "Participante_d")
-    private long ParticipanteId;
+    private Long participanteId;
 
     @NotNull(message = "Campo Puntos no puede estar vacio")
     @Column (name = "Puntos")
-    private String Puntos;
+    private String puntos;
 
     @NotNull (message = "Campo  Victorias no puede estar vacio")
     @Column (name = "Victorias")
-    private String  Victorias;
+    private String  victorias;
 
     @NotNull (message = "Campo Derrotas no puede estar vacio")
     @Column (name = "Ferrotas")
-    private String Derrotas;
+    private String derrotas;
 
     @NotNull (message = "Campo Diferencia no puede estar vacio")
     @Column (name = "Diferencia")
-    private String Diferencia;
+    private String diferencia;
 
     @NotNull (message = "Campo Posicion no puede estar vacio")
     @Column (name = "Posicion")
-    private String Posicion;
+    private String posicion;
 
 
     @Embedded

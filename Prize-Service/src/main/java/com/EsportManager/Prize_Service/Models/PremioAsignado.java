@@ -20,19 +20,19 @@ public class PremioAsignado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="Id")
-    private long Id;
+    private Long id;
 
     @NotNull(message = "Campo PremioId no puede estar vacio")
     @Column (name = "Premio_id")
-    private long PremioId;
+    private Long premioId;
 
     @NotNull (message = "Campo ParticipanteId no puede estar vacio")
     @Column (name = "Participante_id")
-    private long ParticipanteId;
+    private Long participanteId;
 
     @NotNull(message = "Campo FechaAsignacion no puede estar vacio")
     @Column (name = "Fecha_asignacion")
-    private Date FechaAsignacion;
+    private Date fechaAsignacion;
 
 
 
