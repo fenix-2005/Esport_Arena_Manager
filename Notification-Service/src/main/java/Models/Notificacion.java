@@ -3,6 +3,7 @@ package Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,6 +15,7 @@ import java.sql.Date;
 @Setter
 @NamedEntityGraph
 @ToString
+@NoArgsConstructor
 
 public class Notificacion {
 

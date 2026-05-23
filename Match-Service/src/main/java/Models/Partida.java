@@ -47,7 +47,7 @@ public class Partida {
 
     @NotNull(message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")
-    private boolean estado;
+    private String estado;
 
     @Embedded
     Audit audit = new Audit();

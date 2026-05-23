@@ -36,7 +36,7 @@ public class Juego {
 
     @NotNull (message = "Campo JugadoresPorEquipo no puede estar vacio")
     @Column (name = "Jugadores_por_equipo")
-    private String jugadoresPorEquipo;
+    private int jugadoresPorEquipo;
 
     @NotNull(message = "Campo Email no puede estar vacio")
     @Column (name = "Email")

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PartidaRepository extends JpaRepository {
+public interface PartidaRepository extends JpaRepository <Partida, Long>{
 
 
     List<Partida> findByTorneoId(String torneoId);

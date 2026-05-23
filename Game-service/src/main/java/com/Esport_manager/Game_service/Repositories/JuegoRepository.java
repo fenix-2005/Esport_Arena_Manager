@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 
-public interface JuegoRepository extends JpaRepository {
+public interface JuegoRepository extends JpaRepository<Juego, Long>{
 
     //Busca por nombre y manda nada si esta vacio
     Optional<Juego> findByNombre(String nombre);
