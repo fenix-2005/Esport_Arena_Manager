@@ -44,7 +44,7 @@ public class Torneo {
 
     @NotNull(message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")
-    private boolean estado;
+    private String estado;
 
     @NotNull(message = "Campo Modalidad no puede estar vacio")
     @Column (name = "Modalidad")

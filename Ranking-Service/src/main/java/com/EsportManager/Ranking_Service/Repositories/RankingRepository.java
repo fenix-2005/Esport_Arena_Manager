@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface RankingRepository extends JpaRepository<Ranking, Long> {
 
 
-    List<Ranking> findByTorneoId(Long torneoId);
+    List<Ranking>findByTorneoId(Long torneoId);
 
 
     Optional<Ranking> findByTorneoIdAndParticipanteId(Long torneoId, Long participanteId);

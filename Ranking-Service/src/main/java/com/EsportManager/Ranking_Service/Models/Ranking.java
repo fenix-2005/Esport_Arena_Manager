@@ -27,7 +27,7 @@ public class Ranking {
     private Long torneoId;
 
     @NotNull (message = "Campo ParticipanteId no puede estar vacio")
-    @Column (name = "Participante_d")
+    @Column (name = "Participante_id")
     private Long participanteId;
 
     @NotNull(message = "Campo Puntos no puede estar vacio")
@@ -39,7 +39,7 @@ public class Ranking {
     private String  victorias;
 
     @NotNull (message = "Campo Derrotas no puede estar vacio")
-    @Column (name = "Ferrotas")
+    @Column (name = "Derrotas")
     private String derrotas;
 
     @NotNull (message = "Campo Diferencia no puede estar vacio")
@@ -48,7 +48,7 @@ public class Ranking {
 
     @NotNull (message = "Campo Posicion no puede estar vacio")
     @Column (name = "Posicion")
-    private String posicion;
+    private int posicion;
 
 
     @Embedded

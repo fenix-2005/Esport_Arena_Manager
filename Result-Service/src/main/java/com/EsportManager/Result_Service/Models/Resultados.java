@@ -26,6 +26,10 @@ public class Resultados {
     @Column (name = "Partida_id")
     private Long partidaId;
 
+    @NotNull(message = "Campo TorneoId no puede estar vacio")
+    @Column (name = "Torneo_id")
+    private Long torneoId;
+
     @NotNull(message = "Campo GanadorId no puede estar vacio")
     @Column (name = "Ganador_id")
     private Long ganadorId;
@@ -44,7 +48,7 @@ public class Resultados {
 
     @NotNull(message = "Campo EstadoValidacion no puede estar vacio")
     @Column (name = "Estado_validacion")
-    private boolean estadoValidacion;
+    private String estadoValidacion;
 
     @NotNull(message = "Campo FechaRegistro no puede estar vacio")
     @Column (name = "Fecha_registro")

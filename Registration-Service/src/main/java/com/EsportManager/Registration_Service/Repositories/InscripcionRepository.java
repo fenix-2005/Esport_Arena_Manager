@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> {
 
-    List<Inscripcion> findTorneoId(Long torneoId);
+    List<Inscripcion> findByTorneoId(Long torneoId);
 
     List<Inscripcion> findByEquipoId(Long equipoId);
 
@@ -19,5 +19,7 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
     Optional<Inscripcion> findByIdAndTorneoId(Long id, Long torneoId);
 
     Optional<Inscripcion> findByJugadorIdAndTorneoId(Long jugadorId, Long torneoId);
+
+    Optional<Inscripcion> findByEquipoIdAndTorneoId(Long equipoId, Long torneoId);
 
     }

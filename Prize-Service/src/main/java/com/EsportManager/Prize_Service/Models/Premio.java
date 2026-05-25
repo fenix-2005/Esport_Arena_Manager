@@ -24,11 +24,11 @@ public class Premio {
 
     @NotNull(message = "Campo TorneoId no puede estar vacio")
     @Column (name = "Torneo_id")
-    private String torneoId;
+    private Long torneoId;
 
     @NotNull (message = "Campo Posicion no puede estar vacio")
     @Column (name = "Posicion")
-    private String posicion;
+    private int posicion;
 
     @NotNull(message = "Campo Descripcion no puede estar vacio")
     @Column (name = "Descripcion")

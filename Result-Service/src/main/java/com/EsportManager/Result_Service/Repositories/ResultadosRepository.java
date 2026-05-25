@@ -12,5 +12,5 @@ public interface ResultadosRepository extends JpaRepository<Resultados, Long> {
     List<Resultados> findByPartidaId(Long partidaId);
 
 
-    List<Resultados> findBytorneoId(Long torneoId);
+    List<Resultados> findByTorneoId(Long torneoId);
 }
