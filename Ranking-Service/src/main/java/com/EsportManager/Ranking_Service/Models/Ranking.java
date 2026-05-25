@@ -48,7 +48,7 @@ public class Ranking {
 
     @NotNull (message = "Campo Posicion no puede estar vacio")
     @Column (name = "Posicion")
-    private String posicion;
+    private int posicion;
 
 
     @Embedded

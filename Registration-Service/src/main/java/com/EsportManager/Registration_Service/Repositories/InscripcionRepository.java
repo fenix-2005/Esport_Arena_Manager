@@ -20,4 +20,6 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
 
     Optional<Inscripcion> findByJugadorIdAndTorneoId(Long jugadorId, Long torneoId);
 
+    Optional<Inscripcion> findByEquipoIdAndTorneoId(Long equipoId, Long torneoId);
+
     }

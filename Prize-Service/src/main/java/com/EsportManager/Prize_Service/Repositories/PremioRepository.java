@@ -1,6 +1,7 @@
 package com.EsportManager.Prize_Service.Repositories;
 
 import com.EsportManager.Prize_Service.Models.Premio;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,6 @@ public interface PremioRepository extends JpaRepository<Premio, Long> {
 
     // Busca premio por la id del torneo y su pocision
     Optional<Premio> findByTorneoIdAndPosicion(Long torneoId, Integer posicion);
-    }
+
+
+}

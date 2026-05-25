@@ -44,7 +44,7 @@ public class Resultados {
 
     @NotNull(message = "Campo EstadoValidacion no puede estar vacio")
     @Column (name = "Estado_validacion")
-    private boolean estadoValidacion;
+    private String estadoValidacion;
 
     @NotNull(message = "Campo FechaRegistro no puede estar vacio")
     @Column (name = "Fecha_registro")
