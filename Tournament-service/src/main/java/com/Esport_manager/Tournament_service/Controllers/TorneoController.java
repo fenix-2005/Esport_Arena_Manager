@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,7 +32,7 @@ public class TorneoController {
     public ResponseEntity<List<Torneo>> listarTorneos(
             @RequestParam(required = false) Long juegoId,
             @RequestParam(required = false) String estado,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio) {
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaInicio) {
 
         List<Torneo> torneos;
 

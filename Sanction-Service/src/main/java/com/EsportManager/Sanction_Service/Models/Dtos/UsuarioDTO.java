@@ -1,7 +1,7 @@
 package com.EsportManager.Sanction_Service.Models.Dtos;
 
 import lombok.Data;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 public class UsuarioDTO {
@@ -11,5 +11,5 @@ public class UsuarioDTO {
     private String email;
     private String rol;
     private String estado;
-    private Date fechaRegistro;
+    private LocalDate fechaRegistro;
 }

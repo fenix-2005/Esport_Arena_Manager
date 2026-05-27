@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+// No date imports needed if no Date fields are used.
 
 @Entity
 @Table(name = "Ranking")

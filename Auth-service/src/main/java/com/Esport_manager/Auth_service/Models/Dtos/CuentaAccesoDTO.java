@@ -1,7 +1,7 @@
 package com.Esport_manager.Auth_service.Models.Dtos;
 
 import lombok.Data;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 public class CuentaAccesoDTO {
@@ -10,5 +10,5 @@ public class CuentaAccesoDTO {
     private String password;
     private String rol;
     private String estado;
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
 }

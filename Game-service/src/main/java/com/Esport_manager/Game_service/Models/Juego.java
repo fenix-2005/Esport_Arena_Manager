@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Juego")

@@ -1,7 +1,7 @@
 package com.EsportManager.Result_Service.Models.Dtos;
 
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class ResultadosDTO {
@@ -13,5 +13,5 @@ public class ResultadosDTO {
     private int puntajeB;
     private int cupoMaximo;
     private String estadoValidacion;
-    private Date fechaRegistro;
+    private LocalDate fechaRegistro;
 }

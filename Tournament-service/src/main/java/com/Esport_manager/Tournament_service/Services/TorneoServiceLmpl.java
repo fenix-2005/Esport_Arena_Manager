@@ -7,7 +7,7 @@ import com.Esport_manager.Tournament_service.Repositories.TorneoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +77,7 @@ public class TorneoServiceLmpl implements TorneoService {
     }
 
     @Override
-    public List<Torneo> findByFechaInicio(Date fechaInicio) {
+    public List<Torneo> findByFechaInicio(LocalDate fechaInicio) {
         return repository.findByFechaInicio(fechaInicio);
     }
 }

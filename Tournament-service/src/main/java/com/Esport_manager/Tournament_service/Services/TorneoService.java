@@ -3,7 +3,7 @@ package com.Esport_manager.Tournament_service.Services;
 import com.Esport_manager.Tournament_service.Models.Torneo;
 import com.Esport_manager.Tournament_service.Models.Dtos.TorneoDTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TorneoService {
@@ -14,5 +14,5 @@ public interface TorneoService {
     void deleteById(Long id);
     List<Torneo> findByJuegoId(Long juegoId);
     List<Torneo> findByEstado(String estado);
-    List<Torneo> findByFechaInicio(Date fechaInicio);
+    List<Torneo> findByFechaInicio(LocalDate fechaInicio);
 }

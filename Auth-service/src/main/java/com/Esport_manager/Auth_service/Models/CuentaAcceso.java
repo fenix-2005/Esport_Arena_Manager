@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Cuenta_Acceso")
@@ -39,7 +39,7 @@ public class CuentaAcceso {
 
     @NotNull (message = "Campo fechaCreacion no puede estar vacio")
     @Column (name = "fecha_creacion")
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
 
 
     @Embedded

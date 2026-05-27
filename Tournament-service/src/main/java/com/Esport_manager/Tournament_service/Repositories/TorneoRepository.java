@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 @Repository
 
@@ -15,5 +15,5 @@ public interface TorneoRepository extends JpaRepository<Torneo, Long> {
 
     List<Torneo> findByEstado(String estado);
 
-    List<Torneo> findByFechaInicio(Date fechaInicio);
+    List<Torneo> findByFechaInicio(LocalDate fechaInicio);
 }

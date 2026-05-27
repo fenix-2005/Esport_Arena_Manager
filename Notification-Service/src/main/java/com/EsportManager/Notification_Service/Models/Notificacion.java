@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Notificacion")
@@ -46,7 +46,7 @@ public class Notificacion {
 
     @NotNull (message = "Campo Fecha no puede estar vacio")
     @Column (name = "Fecha")
-    private Date fecha;
+    private LocalDate fecha;
 
 
     @Embedded

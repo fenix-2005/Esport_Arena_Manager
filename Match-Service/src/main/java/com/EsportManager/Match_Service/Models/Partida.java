@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.apache.logging.log4j.message.Message;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -43,7 +43,7 @@ public class Partida {
 
     @NotNull(message = "Campo Fecha_Hora no puede estar vacio")
     @Column (name = "Fecha_hora")
-    private Date fechaHora;
+    private LocalDateTime fechaHora;
 
     @NotNull(message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")

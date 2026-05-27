@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "PremioAsignado")
@@ -32,7 +32,7 @@ public class PremioAsignado {
 
     @NotNull(message = "Campo FechaAsignacion no puede estar vacio")
     @Column (name = "Fecha_asignacion")
-    private Date fechaAsignacion;
+    private LocalDate fechaAsignacion;
 
 
 

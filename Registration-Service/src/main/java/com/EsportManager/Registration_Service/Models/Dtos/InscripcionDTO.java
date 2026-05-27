@@ -1,7 +1,7 @@
 package com.EsportManager.Registration_Service.Models.Dtos;
 
 import lombok.Data;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 public class InscripcionDTO {
@@ -11,5 +11,5 @@ public class InscripcionDTO {
     private Long jugadorId;
     private String tipoParticipante;
     private String estado;
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
 }

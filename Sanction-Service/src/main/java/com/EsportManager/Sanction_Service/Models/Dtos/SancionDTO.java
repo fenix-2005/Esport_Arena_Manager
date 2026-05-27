@@ -1,7 +1,7 @@
 package com.EsportManager.Sanction_Service.Models.Dtos;
 
 import lombok.Data;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 public class SancionDTO {
@@ -9,8 +9,8 @@ public class SancionDTO {
     private Long usuarioId;
     private Long equipoId;
     private String motivo;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private String estado;
     private String severida;
 }

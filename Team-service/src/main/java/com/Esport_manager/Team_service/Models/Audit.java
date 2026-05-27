@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 @Embeddable
 @Getter
 @Setter
@@ -18,28 +18,32 @@ import java.time.LocalDateTime;
 
 public class Audit {
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
 
     /**
-     * Este método se ejecuta automaticamente una vez que el objeto es creado
+     * Este mÃƒÂ©todo se ejecuta automaticamente una vez que el objeto es creado
      */
     @PrePersist
     public void prePersist() {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = LocalDate.now();
     }
 
     /**
-     * Este método se ejecuta automaticamente cuando se realiza cualquier actu
-     * lización del objeto que se encuentra asociado.
+     * Este mÃƒÂ©todo se ejecuta automaticamente cuando se realiza cualquier actu
+     * lizaciÃƒÂ³n del objeto que se encuentra asociado.
      */
 
     @PreUpdate
     public void preUpdate() {
-        this.updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDate.now();
     }
 
 }
+
+
+
+
 

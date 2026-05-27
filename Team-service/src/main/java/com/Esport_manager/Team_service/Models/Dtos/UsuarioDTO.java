@@ -1,11 +1,17 @@
 package com.Esport_manager.Team_service.Models.Dtos;
 
 
+import lombok.Data;
+import java.time.LocalDate;
+
+@Data
 public class UsuarioDTO {
 
     private Long id;
     private String nombre;
+    private String nickname;
     private String email;
     private String rol;
-    private Boolean activo;
+    private String estado;
+    private LocalDate fechaRegistro;
 }

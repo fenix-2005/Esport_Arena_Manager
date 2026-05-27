@@ -59,11 +59,12 @@ public class MiembroEquipoServiceLmpl implements MiembroEquipoService {
 
     @Override
     public List<MiembroEquipo> findByEquipoId(Long equipoId) {
-        return List.of();
+        return repository.findByEquipoId(equipoId);
     }
 
     @Override
     public void eliminarPorEquipoYUsuario(Long equipoId, Long usuarioId) {
-
+        Optional<MiembroEquipo> optional = repository.findByEquipoIdAndUsuarioId(equipoId, usuarioId);
+        optional.ifPresent(miembroEquipo -> repository.delete(miembroEquipo));
     }
 }

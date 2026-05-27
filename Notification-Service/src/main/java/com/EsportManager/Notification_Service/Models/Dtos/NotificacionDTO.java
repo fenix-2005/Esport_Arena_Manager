@@ -1,7 +1,7 @@
 package com.EsportManager.Notification_Service.Models.Dtos;
 
 import lombok.Data;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 public class NotificacionDTO {
@@ -11,5 +11,5 @@ public class NotificacionDTO {
     private String tipo;
     private String mensaje;
     private Boolean leida;
-    private Date fecha;
+    private LocalDate fecha;
 }

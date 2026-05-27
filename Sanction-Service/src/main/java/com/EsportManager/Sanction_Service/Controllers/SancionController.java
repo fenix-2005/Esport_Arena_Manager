@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
 
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
+
 @RestController
 @RequestMapping("/api/v1/sanciones")
 public class SancionController {
@@ -63,6 +66,10 @@ public class SancionController {
     public ResponseEntity<Boolean> verificarSancionActiva(
             @RequestParam(required = false) Long usuarioId,
             @RequestParam(required = false) Long equipoId) {
+
+        if (usuarioId == null && equipoId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debe proporcionar usuarioId o equipoId");
+        }
 
         boolean tieneSancion = sancionService.tieneSancionActiva(usuarioId, equipoId);
         return new ResponseEntity<>(tieneSancion, HttpStatus.OK);

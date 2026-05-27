@@ -1,7 +1,8 @@
 package com.EsportManager.Match_Service.Models.Dtos;
 
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class PartidaDTO {
@@ -10,6 +11,6 @@ public class PartidaDTO {
     private Long participanteAId;
     private Long participanteBId;
     private int ronda;
-    private Date fechaHora;
+    private LocalDateTime fechaHora;
     private String estado;
 }
