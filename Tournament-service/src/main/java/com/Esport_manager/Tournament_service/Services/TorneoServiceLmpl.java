@@ -2,10 +2,12 @@ package com.Esport_manager.Tournament_service.Services;
 
 import com.Esport_manager.Tournament_service.Exceptions.TorneoNoEncontradoException;
 import com.Esport_manager.Tournament_service.Models.Torneo;
+import com.Esport_manager.Tournament_service.Models.Dtos.TorneoDTO;
 import com.Esport_manager.Tournament_service.Repositories.TorneoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,22 +32,30 @@ public class TorneoServiceLmpl implements TorneoService {
     }
 
     @Override
-    public Torneo save(Torneo torneo) {
-        return repository.save(torneo);
+    public Torneo save(TorneoDTO dto) {
+        Torneo t = new Torneo();
+        t.setNombre(dto.getNombre());
+        t.setJuegoId(dto.getJuegoId());
+        t.setFechaInicio(dto.getFechaInicio());
+        t.setFechaFin(dto.getFechaFin());
+        t.setCupoMaximo(dto.getCupoMaximo());
+        t.setEstado(dto.getEstado()); // El modelo usa String
+        t.setModalidad(dto.getModalidad());
+        return repository.save(t);
     }
 
     @Override
-    public Torneo updateById(Torneo torneo, Long id) {
+    public Torneo updateById(TorneoDTO dto, Long id) {
         Optional<Torneo> optional = repository.findById(id);
         if (optional.isPresent()) {
             Torneo t = optional.get();
-            t.setNombre(torneo.getNombre());
-            t.setJuegoId(torneo.getJuegoId());
-            t.setFechaInicio(torneo.getFechaInicio());
-            t.setFechaFin(torneo.getFechaFin());
-            t.setCupoMaximo(torneo.getCupoMaximo());
-            t.setEstado(torneo.getEstado());
-            t.setModalidad(torneo.getModalidad());
+            t.setNombre(dto.getNombre());
+            t.setJuegoId(dto.getJuegoId());
+            t.setFechaInicio(dto.getFechaInicio());
+            t.setFechaFin(dto.getFechaFin());
+            t.setCupoMaximo(dto.getCupoMaximo());
+            t.setEstado(dto.getEstado());
+            t.setModalidad(dto.getModalidad());
             return repository.save(t);
         }
         throw new TorneoNoEncontradoException("El torneo con id " + id + " no existe");
@@ -54,5 +64,20 @@ public class TorneoServiceLmpl implements TorneoService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Torneo> findByJuegoId(Long juegoId) {
+        return repository.findByJuegoId(juegoId);
+    }
+
+    @Override
+    public List<Torneo> findByEstado(String estado) {
+        return repository.findByEstado(estado);
+    }
+
+    @Override
+    public List<Torneo> findByFechaInicio(Date fechaInicio) {
+        return repository.findByFechaInicio(fechaInicio);
     }
 }

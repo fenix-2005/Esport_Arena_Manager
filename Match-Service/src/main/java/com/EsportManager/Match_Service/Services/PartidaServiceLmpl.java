@@ -2,6 +2,7 @@ package com.EsportManager.Match_Service.Services;
 
 import com.EsportManager.Match_Service.Exceptions.PartidaNoEncontradaException;
 import com.EsportManager.Match_Service.Models.Partida;
+import com.EsportManager.Match_Service.Models.Dtos.PartidaDTO;
 import com.EsportManager.Match_Service.Repositories.PartidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,21 +31,28 @@ public class PartidaServiceLmpl implements PartidaService {
     }
 
     @Override
-    public Partida save(Partida partida) {
-        return repository.save(partida);
+    public Partida save(PartidaDTO dto) {
+        Partida p = new Partida();
+        p.setTorneoId(dto.getTorneoId());
+        p.setParticipanteAId(dto.getParticipanteAId());
+        p.setParticipanteBId(dto.getParticipanteBId());
+        p.setRonda(dto.getRonda());
+        p.setFechaHora(dto.getFechaHora());
+        p.setEstado(dto.getEstado());
+        return repository.save(p);
     }
 
     @Override
-    public Partida updateById(Partida partida, Long id) {
+    public Partida updateById(PartidaDTO dto, Long id) {
         Optional<Partida> optional = repository.findById(id);
         if (optional.isPresent()) {
             Partida p = optional.get();
-            p.setTorneoId(partida.getTorneoId());
-            p.setParticipanteAId(partida.getParticipanteAId());
-            p.setParticipanteBId(partida.getParticipanteBId());
-            p.setRonda(partida.getRonda());
-            p.setFechaHora(partida.getFechaHora());
-            p.setEstado(partida.getEstado());
+            p.setTorneoId(dto.getTorneoId());
+            p.setParticipanteAId(dto.getParticipanteAId());
+            p.setParticipanteBId(dto.getParticipanteBId());
+            p.setRonda(dto.getRonda());
+            p.setFechaHora(dto.getFechaHora());
+            p.setEstado(dto.getEstado());
             return repository.save(p);
         }
         throw new PartidaNoEncontradaException("La partida con id " + id + " no existe");
@@ -53,5 +61,20 @@ public class PartidaServiceLmpl implements PartidaService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Partida> findByTorneoId(Long torneoId) {
+        return repository.findByTorneoId(torneoId);
+    }
+
+    @Override
+    public List<Partida> findByEstado(String estado) {
+        return repository.findByEstado(estado);
+    }
+
+    @Override
+    public List<Partida> findByRonda(Integer ronda) {
+        return repository.findByRonda(ronda);
     }
 }

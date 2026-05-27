@@ -26,7 +26,6 @@ public class CuentaAcceso {
     @Column (name = "Email")
     private String email;
 
-    @NotNull (message = "Campo Password no puede estar vacio")
     @Column (name = "Password")
     private String password;
 

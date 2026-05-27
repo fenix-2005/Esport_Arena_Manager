@@ -1,5 +1,6 @@
 package com.EsportManager.Prize_Service.Services;
 
+import com.EsportManager.Prize_Service.Models.Dtos.PremioAsignadoDTO;
 import com.EsportManager.Prize_Service.Models.PremioAsignado;
 import com.EsportManager.Prize_Service.Repositories.PremioAsignadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,22 @@ public class PremioAsignadoServiceLmpl implements PremioAsignadoService {
     }
 
     @Override
-    public PremioAsignado save(PremioAsignado premioAsignado) {
-        return repository.save(premioAsignado);
+    public PremioAsignado save(PremioAsignadoDTO dto) {
+        PremioAsignado p = new PremioAsignado();
+        p.setPremioId(dto.getPremioId());
+        p.setParticipanteId(dto.getParticipanteId());
+        p.setFechaAsignacion(dto.getFechaAsignacion());
+        return repository.save(p);
     }
 
     @Override
-    public PremioAsignado updateById(PremioAsignado premioAsignado, Long id) {
+    public PremioAsignado updateById(PremioAsignadoDTO dto, Long id) {
         Optional<PremioAsignado> optional = repository.findById(id);
         if (optional.isPresent()) {
             PremioAsignado p = optional.get();
-            p.setPremioId(premioAsignado.getPremioId());
-            p.setParticipanteId(premioAsignado.getParticipanteId());
-            p.setFechaAsignacion(premioAsignado.getFechaAsignacion());
+            p.setPremioId(dto.getPremioId());
+            p.setParticipanteId(dto.getParticipanteId());
+            p.setFechaAsignacion(dto.getFechaAsignacion());
             return repository.save(p);
         }
         return null;
@@ -49,5 +54,10 @@ public class PremioAsignadoServiceLmpl implements PremioAsignadoService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<PremioAsignado> findByParticipanteId(Long participanteId) {
+        return repository.findByParticipanteId(participanteId);
     }
 }

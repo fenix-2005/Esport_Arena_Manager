@@ -10,9 +10,9 @@ import java.util.List;
 public interface PartidaRepository extends JpaRepository <Partida, Long>{
 
 
-    List<Partida> findByTorneoId(String torneoId);
+    List<Partida> findByTorneoId(Long torneoId);
 
     List<Partida> findByEstado(String estado);
 
-    List<Partida> findByRonda(int ronda);
+    List<Partida> findByRonda(Integer ronda);
 }

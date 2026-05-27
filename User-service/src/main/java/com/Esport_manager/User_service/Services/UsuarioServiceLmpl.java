@@ -1,6 +1,7 @@
 package com.Esport_manager.User_service.Services;
 
 import com.Esport_manager.User_service.Models.Usuario;
+import com.Esport_manager.User_service.Models.Dtos.UsuarioDTO;
 import com.Esport_manager.User_service.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,21 +30,28 @@ public class UsuarioServiceLmpl implements UsuarioService {
     }
 
     @Override
-    public Usuario save(Usuario usuario) {
-        return repository.save(usuario);
+    public Usuario save(UsuarioDTO dto) {
+        Usuario u = new Usuario();
+        u.setNombre(dto.getNombre());
+        u.setNickname(dto.getNickname());
+        u.setEmail(dto.getEmail());
+        u.setRol(dto.getRol());
+        u.setEstado(dto.getEstado());
+        u.setFechaRegistro(dto.getFechaRegistro());
+        return repository.save(u);
     }
 
     @Override
-    public Usuario updateById(Usuario usuario, Long id) {
+    public Usuario updateById(UsuarioDTO dto, Long id) {
         Optional<Usuario> optional = repository.findById(id);
         if (optional.isPresent()) {
             Usuario u = optional.get();
-            u.setNombre(usuario.getNombre());
-            u.setNickname(usuario.getNickname());
-            u.setEmail(usuario.getEmail());
-            u.setRol(usuario.getRol());
-            u.setEstado(usuario.getEstado());
-            u.setFechaRegistro(usuario.getFechaRegistro());
+            u.setNombre(dto.getNombre());
+            u.setNickname(dto.getNickname());
+            u.setEmail(dto.getEmail());
+            u.setRol(dto.getRol());
+            u.setEstado(dto.getEstado());
+            u.setFechaRegistro(dto.getFechaRegistro());
             return repository.save(u);
         }
         return null;
@@ -52,5 +60,20 @@ public class UsuarioServiceLmpl implements UsuarioService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Usuario> findByRol(String rol) {
+        return repository.findByRol(rol);
+    }
+
+    @Override
+    public List<Usuario> findByEstado(String estado) {
+        return repository.findByEstado(estado);
+    }
+
+    @Override
+    public Optional<Usuario> findByNickname(String nickname) {
+        return repository.findByNickname(nickname);
     }
 }

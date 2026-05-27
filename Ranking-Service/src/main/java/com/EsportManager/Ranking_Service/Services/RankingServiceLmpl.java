@@ -2,6 +2,7 @@ package com.EsportManager.Ranking_Service.Services;
 
 import com.EsportManager.Ranking_Service.Exceptions.RankingNoEncontradoException;
 import com.EsportManager.Ranking_Service.Models.Ranking;
+import com.EsportManager.Ranking_Service.Models.Dtos.RankingDTO;
 import com.EsportManager.Ranking_Service.Repositories.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,22 +31,30 @@ public class RankingServiceLmpl implements RankingService {
     }
 
     @Override
-    public Ranking save(Ranking ranking) {
-        return repository.save(ranking);
+    public Ranking save(RankingDTO dto) {
+        Ranking r = new Ranking();
+        r.setTorneoId(dto.getTorneoId());
+        r.setParticipanteId(dto.getParticipanteId());
+        r.setPuntos(dto.getPuntos());
+        r.setVictorias(dto.getVictorias());
+        r.setDerrotas(dto.getDerrotas());
+        r.setDiferencia(dto.getDiferencia());
+        r.setPosicion(dto.getPosicion());
+        return repository.save(r);
     }
 
     @Override
-    public Ranking updateById(Ranking ranking, Long id) {
+    public Ranking updateById(RankingDTO dto, Long id) {
         Optional<Ranking> optional = repository.findById(id);
         if (optional.isPresent()) {
             Ranking r = optional.get();
-            r.setTorneoId(ranking.getTorneoId());
-            r.setParticipanteId(ranking.getParticipanteId());
-            r.setPuntos(ranking.getPuntos());
-            r.setVictorias(ranking.getVictorias());
-            r.setDerrotas(ranking.getDerrotas());
-            r.setDiferencia(ranking.getDiferencia());
-            r.setPosicion(ranking.getPosicion());
+            r.setTorneoId(dto.getTorneoId());
+            r.setParticipanteId(dto.getParticipanteId());
+            r.setPuntos(dto.getPuntos());
+            r.setVictorias(dto.getVictorias());
+            r.setDerrotas(dto.getDerrotas());
+            r.setDiferencia(dto.getDiferencia());
+            r.setPosicion(dto.getPosicion());
             return repository.save(r);
         }
         throw new RankingNoEncontradoException("El ranking con id " + id + " no existe");
@@ -54,5 +63,15 @@ public class RankingServiceLmpl implements RankingService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Ranking> findByTorneoId(Long torneoId) {
+        return repository.findByTorneoId(torneoId);
+    }
+
+    @Override
+    public Optional<Ranking> findByTorneoIdAndParticipanteId(Long torneoId, Long participanteId) {
+        return repository.findByTorneoIdAndParticipanteId(torneoId, participanteId);
     }
 }

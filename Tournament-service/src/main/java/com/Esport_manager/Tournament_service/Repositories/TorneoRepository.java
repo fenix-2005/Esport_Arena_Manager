@@ -13,7 +13,7 @@ public interface TorneoRepository extends JpaRepository<Torneo, Long> {
 
     List<Torneo> findByJuegoId(Long juegoId);
 
-    List<Torneo> findByEstado(Boolean estado);
+    List<Torneo> findByEstado(String estado);
 
     List<Torneo> findByFechaInicio(Date fechaInicio);
 }

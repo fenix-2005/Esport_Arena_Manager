@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface NotificacionRepository extends JpaRepository <Notificacion, Long>{
     // "Listar notificaciones por usuario"
-    List<Notificacion> findByusuarioId(Long usuarioId);
+    List<Notificacion> findByUsuarioId(Long usuarioId);
 
     // "Listar notificaciones por equipo"
     List<Notificacion> findByEquipoId(Long equipoId);

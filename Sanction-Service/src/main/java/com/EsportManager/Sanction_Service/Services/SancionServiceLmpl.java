@@ -2,6 +2,7 @@ package com.EsportManager.Sanction_Service.Services;
 
 import com.EsportManager.Sanction_Service.Exceptions.SancionNoEncontradaException;
 import com.EsportManager.Sanction_Service.Models.Sancion;
+import com.EsportManager.Sanction_Service.Models.Dtos.SancionDTO;
 import com.EsportManager.Sanction_Service.Repositories.SancionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,22 +31,30 @@ public class SancionServiceLmpl implements SancionService {
     }
 
     @Override
-    public Sancion save(Sancion sancion) {
-        return repository.save(sancion);
+    public Sancion save(SancionDTO dto) {
+        Sancion s = new Sancion();
+        s.setUsuarioId(dto.getUsuarioId());
+        s.setEquipoId(dto.getEquipoId());
+        s.setMotivo(dto.getMotivo());
+        s.setFechaInicio(dto.getFechaInicio());
+        s.setFechaFin(dto.getFechaFin());
+        s.setEstado(dto.getEstado());
+        s.setSeverida(dto.getSeverida());
+        return repository.save(s);
     }
 
     @Override
-    public Sancion updateById(Sancion sancion, Long id) {
+    public Sancion updateById(SancionDTO dto, Long id) {
         Optional<Sancion> optional = repository.findById(id);
         if (optional.isPresent()) {
             Sancion s = optional.get();
-            s.setUsuarioId(sancion.getUsuarioId());
-            s.setEquipoId(sancion.getEquipoId());
-            s.setMotivo(sancion.getMotivo());
-            s.setFechaInicio(sancion.getFechaInicio());
-            s.setFechaFin(sancion.getFechaFin());
-            s.setEstado(sancion.getEstado());
-            s.setSeverida(sancion.getSeverida());
+            s.setUsuarioId(dto.getUsuarioId());
+            s.setEquipoId(dto.getEquipoId());
+            s.setMotivo(dto.getMotivo());
+            s.setFechaInicio(dto.getFechaInicio());
+            s.setFechaFin(dto.getFechaFin());
+            s.setEstado(dto.getEstado());
+            s.setSeverida(dto.getSeverida());
             return repository.save(s);
         }
         throw new SancionNoEncontradaException("La sancion con id " + id + " no existe");
@@ -54,5 +63,46 @@ public class SancionServiceLmpl implements SancionService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Sancion> findByUsuarioIdAndEstado(Long usuarioId, String estado) {
+        return repository.findByUsuarioIdAndEstado(usuarioId, estado);
+    }
+
+    @Override
+    public List<Sancion> findByEquipoIdAndEstado(Long equipoId, String estado) {
+        return repository.findByEquipoIdAndEstado(equipoId, estado);
+    }
+
+    @Override
+    public List<Sancion> findByUsuarioId(Long usuarioId) {
+        return repository.findByUsuarioId(usuarioId);
+    }
+
+    @Override
+    public List<Sancion> findByEquipoId(Long equipoId) {
+        return repository.findByEquipoId(equipoId);
+    }
+
+    @Override
+    public List<Sancion> findByEstado(String estado) {
+        return repository.findByEstado(estado);
+    }
+
+    @Override
+    public boolean tieneSancionActiva(Long usuarioId, Long equipoId) {
+        return repository.existsByUsuarioIdAndEquipoIdAndEstado(usuarioId, equipoId, "ACTIVA");
+    }
+
+    @Override
+    public Sancion cerrarSancion(Long id) {
+        Optional<Sancion> optional = repository.findById(id);
+        if (optional.isPresent()) {
+            Sancion sancion = optional.get();
+            sancion.setEstado("CERRADA");
+            return repository.save(sancion);
+        }
+        throw new SancionNoEncontradaException("La sancion con id " + id + " no existe");
     }
 }

@@ -1,6 +1,7 @@
 package com.Esport_manager.Team_service.Services;
 
 import com.Esport_manager.Team_service.Models.Equipo;
+import com.Esport_manager.Team_service.Models.Dtos.EquipoDTO;
 import com.Esport_manager.Team_service.Repositories.EquipoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,19 +30,24 @@ public class EquipoServiceLmpl implements EquipoService {
     }
 
     @Override
-    public Equipo save(Equipo equipo) {
-        return repository.save(equipo);
+    public Equipo save(EquipoDTO dto) {
+        Equipo e = new Equipo();
+        e.setNombre(dto.getNombre());
+        e.setCapitanId(dto.getCapitanId());
+        e.setJuegoPrincipalId(dto.getJuegoPrincipalId());
+        e.setEstado(dto.getEstado());
+        return repository.save(e);
     }
 
     @Override
-    public Equipo updateById(Equipo equipo, Long id) {
+    public Equipo updateById(EquipoDTO dto, Long id) {
         Optional<Equipo> optional = repository.findById(id);
         if (optional.isPresent()) {
             Equipo e = optional.get();
-            e.setNombre(equipo.getNombre());
-            e.setCapitanId(equipo.getCapitanId());
-            e.setJuegoPrincipalId(equipo.getJuegoPrincipalId());
-            e.setEstado(equipo.getEstado());
+            e.setNombre(dto.getNombre());
+            e.setCapitanId(dto.getCapitanId());
+            e.setJuegoPrincipalId(dto.getJuegoPrincipalId());
+            e.setEstado(dto.getEstado());
             return repository.save(e);
         }
         return null;
@@ -50,5 +56,20 @@ public class EquipoServiceLmpl implements EquipoService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Equipo> findByJuegoPrincipalId(Long juegoPrincipalId) {
+        return repository.findByJuegoPrincipalId(juegoPrincipalId);
+    }
+
+    @Override
+    public List<Equipo> findByCapitanId(Long capitanId) {
+        return repository.findByCapitanId(capitanId);
+    }
+
+    @Override
+    public List<Equipo> findByEstado(String estado) {
+        return repository.findByEstado(estado);
     }
 }

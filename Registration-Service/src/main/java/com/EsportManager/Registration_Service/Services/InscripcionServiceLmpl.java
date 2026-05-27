@@ -1,5 +1,6 @@
 package com.EsportManager.Registration_Service.Services;
 
+import com.EsportManager.Registration_Service.Models.Dtos.InscripcionDTO;
 import com.EsportManager.Registration_Service.Models.Inscripcion;
 import com.EsportManager.Registration_Service.Repositories.InscripcionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +30,28 @@ public class InscripcionServiceLmpl implements InscripcionService {
     }
 
     @Override
-    public Inscripcion save(Inscripcion inscripcion) {
-        return repository.save(inscripcion);
+    public Inscripcion save(InscripcionDTO dto) {
+        Inscripcion i = new Inscripcion();
+        i.setTorneoId(dto.getTorneoId());
+        i.setEquipoId(dto.getEquipoId());
+        i.setJugadorId(dto.getJugadorId());
+        i.setTipoParticipante(dto.getTipoParticipante());
+        i.setEstado(dto.getEstado());
+        i.setFechaInscripcion(dto.getFechaInscripcion());
+        return repository.save(i);
     }
 
     @Override
-    public Inscripcion updateById(Inscripcion inscripcion, Long id) {
+    public Inscripcion updateById(InscripcionDTO dto, Long id) {
         Optional<Inscripcion> optional = repository.findById(id);
         if (optional.isPresent()) {
             Inscripcion i = optional.get();
-            i.setTorneoId(inscripcion.getTorneoId());
-            i.setEquipoId(inscripcion.getEquipoId());
-            i.setJugadorId(inscripcion.getJugadorId());
-            i.setTipoParticipante(inscripcion.getTipoParticipante());
-            i.setEstado(inscripcion.getEstado());
-            i.setFechaInscripcion(inscripcion.getFechaInscripcion());
+            i.setTorneoId(dto.getTorneoId());
+            i.setEquipoId(dto.getEquipoId());
+            i.setJugadorId(dto.getJugadorId());
+            i.setTipoParticipante(dto.getTipoParticipante());
+            i.setEstado(dto.getEstado());
+            i.setFechaInscripcion(dto.getFechaInscripcion());
             return repository.save(i);
         }
         return null;
@@ -52,5 +60,20 @@ public class InscripcionServiceLmpl implements InscripcionService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Inscripcion> findByTorneoId(Long torneoId) {
+        return repository.findByTorneoId(torneoId);
+    }
+
+    @Override
+    public List<Inscripcion> findByEquipoId(Long equipoId) {
+        return repository.findByEquipoId(equipoId);
+    }
+
+    @Override
+    public List<Inscripcion> findByJugadorId(Long jugadorId) {
+        return repository.findByJugadorId(jugadorId);
     }
 }

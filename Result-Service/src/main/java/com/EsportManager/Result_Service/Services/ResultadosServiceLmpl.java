@@ -1,5 +1,6 @@
 package com.EsportManager.Result_Service.Services;
 
+import com.EsportManager.Result_Service.Models.Dtos.ResultadosDTO;
 import com.EsportManager.Result_Service.Models.Resultados;
 import com.EsportManager.Result_Service.Repositories.ResultadosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +30,32 @@ public class ResultadosServiceLmpl implements ResultadosService {
     }
 
     @Override
-    public Resultados save(Resultados resultados) {
-        return repository.save(resultados);
+    public Resultados save(ResultadosDTO dto) {
+        Resultados r = new Resultados();
+        r.setPartidaId(dto.getPartidaId());
+        r.setTorneoId(dto.getTorneoId());
+        r.setGanadorId(dto.getGanadorId());
+        r.setPuntajeA(dto.getPuntajeA());
+        r.setPuntajeB(dto.getPuntajeB());
+        r.setCupoMaximo(dto.getCupoMaximo());
+        r.setEstadoValidacion(dto.getEstadoValidacion());
+        r.setFechaRegistro(dto.getFechaRegistro());
+        return repository.save(r);
     }
 
     @Override
-    public Resultados updateById(Resultados resultados, Long id) {
+    public Resultados updateById(ResultadosDTO dto, Long id) {
         Optional<Resultados> optional = repository.findById(id);
         if (optional.isPresent()) {
             Resultados r = optional.get();
-            r.setPartidaId(resultados.getPartidaId());
-            r.setTorneoId(resultados.getTorneoId());
-            r.setGanadorId(resultados.getGanadorId());
-            r.setPuntajeA(resultados.getPuntajeA());
-            r.setPuntajeB(resultados.getPuntajeB());
-            r.setCupoMaximo(resultados.getCupoMaximo());
-            r.setEstadoValidacion(resultados.getEstadoValidacion());
-            r.setFechaRegistro(resultados.getFechaRegistro());
+            r.setPartidaId(dto.getPartidaId());
+            r.setTorneoId(dto.getTorneoId());
+            r.setGanadorId(dto.getGanadorId());
+            r.setPuntajeA(dto.getPuntajeA());
+            r.setPuntajeB(dto.getPuntajeB());
+            r.setCupoMaximo(dto.getCupoMaximo());
+            r.setEstadoValidacion(dto.getEstadoValidacion());
+            r.setFechaRegistro(dto.getFechaRegistro());
             return repository.save(r);
         }
         return null;
@@ -54,5 +64,15 @@ public class ResultadosServiceLmpl implements ResultadosService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Resultados> findByTorneoId(Long torneoId) {
+        return repository.findByTorneoId(torneoId);
+    }
+
+    @Override
+    public List<Resultados> findByPartidaId(Long partidaId) {
+        return repository.findByPartidaId(partidaId);
     }
 }

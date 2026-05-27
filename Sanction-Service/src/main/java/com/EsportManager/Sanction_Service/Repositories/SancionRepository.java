@@ -17,4 +17,6 @@ public interface SancionRepository extends JpaRepository<Sancion, Long> {
     List<Sancion> findByUsuarioIdAndEstado(Long usuarioId, String estado);
 
     List<Sancion> findByEquipoIdAndEstado(Long equipoId, String estado);
+
+    boolean existsByUsuarioIdAndEquipoIdAndEstado(Long usuarioId, Long equipoId, String estado);
 }
