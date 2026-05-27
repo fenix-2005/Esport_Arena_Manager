@@ -26,7 +26,7 @@ public class Notificacion {
 
     @NotNull(message = "Campo UserID no puede estar vacio")
     @Column (name = "User_id")
-    private Long userId;
+    private Long usuarioId;
 
     @NotNull (message = "Campo EquipoId no puede estar vacio")
     @Column (name = "Equipo_id")

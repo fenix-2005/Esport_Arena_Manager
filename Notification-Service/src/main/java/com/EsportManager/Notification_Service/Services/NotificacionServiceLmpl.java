@@ -39,7 +39,7 @@ public class NotificacionServiceLmpl implements NotificacionService {
         Optional<Notificacion> optional = repository.findById(id);
         if (optional.isPresent()) {
             Notificacion n = optional.get();
-            n.setUserId(notificacion.getUserId());
+            n.setUsuarioId(notificacion.getUsuarioId());
             n.setEquipoId(notificacion.getEquipoId());
             n.setTipo(notificacion.getTipo());
             n.setMensaje(notificacion.getMensaje());

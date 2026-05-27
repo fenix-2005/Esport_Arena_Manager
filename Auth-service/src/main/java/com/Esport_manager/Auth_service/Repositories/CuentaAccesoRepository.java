@@ -12,8 +12,7 @@ public interface CuentaAccesoRepository extends JpaRepository<CuentaAcceso, Long
     //Busca por email y manda nada si esta vacio
     Optional<CuentaAcceso>findByEmail(String email);
 
-    //Lista todos los usuarios por Estado
-    List<CuentaAcceso> findbyestado(boolean estado);
+
 
     //Lista todos los usuarios por Rol
     List<CuentaAcceso> findByRol(String rol);
