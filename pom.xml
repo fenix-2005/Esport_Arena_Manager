@@ -65,6 +65,7 @@
 		<module>Ranking-Service</module>
 		<module>Registration-Service</module>
 		<module>Result-Service</module>
+		<module>msvc-gateway</module>
 	</modules>
 
 </project>
