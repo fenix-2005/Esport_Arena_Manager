@@ -17,7 +17,7 @@ spring:
               predicates:
                 -
             - id: Match-Service
-              uri: lb://Match-Service
+              uri:
               predicates:
                 -
             - id:
