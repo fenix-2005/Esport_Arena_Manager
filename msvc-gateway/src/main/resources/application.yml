@@ -12,52 +12,51 @@ spring:
               uri: lb://Auth-service
               predicates:
                 -
-            - id: Game-Service
-              uri: lb://Game-Service
+            - id: Game-service
+              uri: lb://Game-service
               predicates:
                 -
             - id: Match-Service
-              uri:
+              uri: lb://Match-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Notification-Service
+              uri: lb://Notification-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Prize-Service
+              uri: lb://Prize-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Ranking-Service
+              uri: lb://Ranking-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Registration-Service
+              uri: lb://Registration-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Result-Service
+              uri: lb://Result-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Sanction-Service
+              uri: lb://Sanction-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Team-Service
+              uri: lb://Team-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: Tournament-Service
+              uri: lb://Tournament-Service
               predicates:
                 -
-            - id:
-              uri:
+            - id: User-Service
+              uri: lb://User-Service
               predicates:
                 -
 
-                -
 
             # Rutas para el OpenAPI (JSON) de cada microservicio. El Swagger UI del gateway
             # las consume. Usan el prefijo /api-docs/<svc> (NO /v3/api-docs) para no chocar con
