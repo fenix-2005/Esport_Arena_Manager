@@ -25,7 +25,7 @@ public class Audit {
     private LocalDate updatedAt;
 
     /**
-     * Este mÃƒÂ©todo se ejecuta automaticamente una vez que el objeto es creado
+     * todo se ejecuta automaticamente una vez que el objeto es creado
      */
     @PrePersist
     public void prePersist(){

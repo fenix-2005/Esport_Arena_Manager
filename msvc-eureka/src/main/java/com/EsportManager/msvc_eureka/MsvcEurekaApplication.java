@@ -1,4 +1,4 @@
-package com.hospital.msvc_eureka;
+package com.EsportManager.msvc_eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
