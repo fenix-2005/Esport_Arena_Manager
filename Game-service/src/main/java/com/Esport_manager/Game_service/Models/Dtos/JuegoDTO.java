@@ -1,7 +1,9 @@
 package com.Esport_manager.Game_service.Models.Dtos;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class JuegoDTO {
     private Long id;

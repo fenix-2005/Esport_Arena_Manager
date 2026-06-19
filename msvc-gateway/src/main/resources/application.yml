@@ -11,74 +11,127 @@ spring:
             - id: Auth-service
               uri: lb://Auth-service
               predicates:
-                -
+                - Path=/api/v1/cuentas/**,/api/v2/cuentas/**
             - id: Game-service
               uri: lb://Game-service
               predicates:
-                -
+                - Path=/api/v1/juegos/**,/api/v2/juegos/**
             - id: Match-Service
               uri: lb://Match-Service
               predicates:
-                -
+                - Path=/api/v1/partidas/**,/api/v2/partidas/**
             - id: Notification-Service
               uri: lb://Notification-Service
               predicates:
-                -
+                - Path=/api/v1/notificaciones/**,/api/v2/notificaciones/**
             - id: Prize-Service
               uri: lb://Prize-Service
               predicates:
-                -
+                - Path=/api/v1/premios/**,/api/v2/premios/**
             - id: Ranking-Service
               uri: lb://Ranking-Service
               predicates:
-                -
+                - Path=/api/v1/rankings/**,/api/v2/rankings/**
             - id: Registration-Service
               uri: lb://Registration-Service
               predicates:
-                -
+                - Path=/api/v1/inscripciones/**,/api/v2/inscripciones/**
             - id: Result-Service
               uri: lb://Result-Service
               predicates:
-                -
+                - Path=/api/v1/resultados/**,/api/v2/resultados/**
             - id: Sanction-Service
               uri: lb://Sanction-Service
               predicates:
-                -
+                - Path=/api/v1/sanciones/**,/api/v2/sanciones/**
             - id: Team-Service
               uri: lb://Team-Service
               predicates:
-                -
+                - Path=/api/v1/equipos/**,/api/v2/equipos/**
             - id: Tournament-Service
               uri: lb://Tournament-Service
               predicates:
-                -
+                - Path=/api/v1/torneos/**,/api/v2/torneos/**
             - id: User-Service
               uri: lb://User-Service
               predicates:
-                -
-
+                - Path=/api/v1/usuarios/**,/api/v2/usuarios/**
 
             # Rutas para el OpenAPI (JSON) de cada microservicio. El Swagger UI del gateway
             # las consume. Usan el prefijo /api-docs/<svc> (NO /v3/api-docs) para no chocar con
             # el /v3/api-docs propio del gateway. RewritePath lo traduce al /v3/api-docs real del servicio.
-            - id:
-              uri: lb://
+            - id: auth-api-docs
+              uri: lb://Auth-service
               predicates:
-                - Path=/api-docs/
+                - Path=/api-docs/auth
               filters:
-                - RewritePath=
-            - id:
-              uri: lb://
+                - RewritePath=/api-docs/auth, /v3/api-docs
+            - id: game-api-docs
+              uri: lb://Game-service
               predicates:
-                - Path=
+                - Path=/api-docs/game
               filters:
-                - RewritePath=
-            - id:
-              uri: lb://
+                - RewritePath=/api-docs/game, /v3/api-docs
+            - id: match-api-docs
+              uri: lb://Match-Service
               predicates:
-                -
+                - Path=/api-docs/match
               filters:
-                -
+                - RewritePath=/api-docs/match, /v3/api-docs
+            - id: notification-api-docs
+              uri: lb://Notification-Service
+              predicates:
+                - Path=/api-docs/notification
+              filters:
+                - RewritePath=/api-docs/notification, /v3/api-docs
+            - id: prize-api-docs
+              uri: lb://Prize-Service
+              predicates:
+                - Path=/api-docs/prize
+              filters:
+                - RewritePath=/api-docs/prize, /v3/api-docs
+            - id: ranking-api-docs
+              uri: lb://Ranking-Service
+              predicates:
+                - Path=/api-docs/ranking
+              filters:
+                - RewritePath=/api-docs/ranking, /v3/api-docs
+            - id: registration-api-docs
+              uri: lb://Registration-Service
+              predicates:
+                - Path=/api-docs/registration
+              filters:
+                - RewritePath=/api-docs/registration, /v3/api-docs
+            - id: result-api-docs
+              uri: lb://Result-Service
+              predicates:
+                - Path=/api-docs/result
+              filters:
+                - RewritePath=/api-docs/result, /v3/api-docs
+            - id: sanction-api-docs
+              uri: lb://Sanction-Service
+              predicates:
+                - Path=/api-docs/sanction
+              filters:
+                - RewritePath=/api-docs/sanction, /v3/api-docs
+            - id: team-api-docs
+              uri: lb://Team-Service
+              predicates:
+                - Path=/api-docs/team
+              filters:
+                - RewritePath=/api-docs/team, /v3/api-docs
+            - id: tournament-api-docs
+              uri: lb://Tournament-Service
+              predicates:
+                - Path=/api-docs/tournament
+              filters:
+                - RewritePath=/api-docs/tournament, /v3/api-docs
+            - id: user-api-docs
+              uri: lb://User-Service
+              predicates:
+                - Path=/api-docs/user
+              filters:
+                - RewritePath=/api-docs/user, /v3/api-docs
 
 # Punto de entrada unico: todo el trafico entra por aqui.
 server:
@@ -97,9 +150,31 @@ springdoc:
     path: /docs/swagger-ui.html
     # El desplegable apunta a los docs de cada servicio (ruteados por el gateway via lb://).
     urls:
-      - name:
-        url: /api-docs/
-      - name:
-        url: /api-docs/
-      - name:
-        url: /api-docs/
+      - name: Auth-service
+        url: /api-docs/auth
+      - name: Game-service
+        url: /api-docs/game
+      - name: Match-Service
+        url: /api-docs/match
+      - name: Notification-Service
+        url: /api-docs/notification
+      - name: Prize-Service
+        url: /api-docs/prize
+      - name: Ranking-Service
+        url: /api-docs/ranking
+      - name: Registration-Service
+        url: /api-docs/registration
+      - name: Result-Service
+        url: /api-docs/result
+      - name: Sanction-Service
+        url: /api-docs/sanction
+      - name: Team-Service
+        url: /api-docs/team
+      - name: Tournament-Service
+        url: /api-docs/tournament
+      - name: User-Service
+        url: /api-docs/user
+
+# CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los 3 microservicios. El gateway la usa para validar.
+jwt:
+  secret: clave-secreta-super-segura-para-jwt-hospital-msvc-duoc-2026-0616
