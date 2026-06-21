@@ -6,6 +6,9 @@ import com.EsportManager.Prize_Service.Models.Dtos.PremioDTO;
 import com.EsportManager.Prize_Service.Models.Dtos.PremioAsignadoDTO;
 import com.EsportManager.Prize_Service.Services.PremioService;
 import com.EsportManager.Prize_Service.Services.PremioAsignadoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/premios")
+@Tag(name = "Gestión de Premios", description = "Endpoints para el control de incentivos, pozos y adjudicaciones")
 public class PremioController {
 
     @Autowired
@@ -23,22 +27,19 @@ public class PremioController {
     @Autowired
     private PremioAsignadoService premioAsignadoService;
 
-
-    // 1. Crear un premio nuevo
+    @Operation(summary = "Crear nuevo premio", description = "Configura una recompensa específica (efectivo, hardware, medallas) asociada a un torneo.")
     @PostMapping
     public ResponseEntity<Premio> crearPremio(@Valid @RequestBody PremioDTO dto) {
         Premio nuevoPremio = premioService.save(dto);
         return new ResponseEntity<>(nuevoPremio, HttpStatus.CREATED);
     }
 
-    // 2. Listar premios
+    @Operation(summary = "Listar premios configurados", description = "Recupera la lista general de premios con filtros por torneo o posición de podio.")
     @GetMapping
     public ResponseEntity<List<Premio>> listarPremios(
             @RequestParam(required = false) Long torneoId,
             @RequestParam(required = false) Integer posicion) {
-
         List<Premio> premios;
-
         if (torneoId != null) {
             premios = premioService.findByTorneoId(torneoId);
         } else if (posicion != null) {
@@ -46,51 +47,43 @@ public class PremioController {
         } else {
             premios = premioService.findAll();
         }
-
         return new ResponseEntity<>(premios, HttpStatus.OK);
     }
 
-    // 3. Buscar premio por ID
+    @Operation(summary = "Buscar premio por ID", description = "Obtiene los detalles del premio seleccionado.")
     @GetMapping("/{id}")
     public ResponseEntity<Premio> buscarPremioPorId(@PathVariable Long id) {
         Premio premio = premioService.findById(id);
         return new ResponseEntity<>(premio, HttpStatus.OK);
     }
 
-    // 4. Actualizar un premio (antes de ser asignado)
+    @Operation(summary = "Modificar datos de un premio", description = "Permite corregir descripciones o reajustar los valores monetarios antes de congelar el torneo.")
     @PutMapping("/{id}")
-    public ResponseEntity<Premio> actualizarPremio(
-            @PathVariable Long id,
-            @Valid @RequestBody PremioDTO dto) {
+    public ResponseEntity<Premio> actualizarPremio(@PathVariable Long id, @Valid @RequestBody PremioDTO dto) {
         Premio premioActualizado = premioService.updateById(dto, id);
         return new ResponseEntity<>(premioActualizado, HttpStatus.OK);
     }
 
-    // 5. Eliminar un premio
+    @Operation(summary = "Eliminar premio del catálogo", description = "Remueve un incentivo configurado del registro permanente.")
+    @ApiResponse(responseCode = "204", description = "Premio borrado con éxito")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarPremio(@PathVariable Long id) {
         premioService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // 6. Asignar un premio a un participante
+    @Operation(summary = "Adjudicar premio a un ganador", description = "Vincula un premio específico al identificador del participante triunfador del torneo.")
     @PostMapping("/asignar")
     public ResponseEntity<PremioAsignado> asignarPremio(@Valid @RequestBody PremioAsignadoDTO dto) {
         PremioAsignado nuevaAsignacion = premioAsignadoService.save(dto);
         return new ResponseEntity<>(nuevaAsignacion, HttpStatus.CREATED);
     }
 
-    // 7. Listar premios asignados
+    @Operation(summary = "Listar historial de premios entregados", description = "Obtiene todos los premios que ya fueron cobrados, con opción de filtrar por participante.")
     @GetMapping("/asignados")
-    public ResponseEntity<List<PremioAsignado>> listarPremiosAsignados(
-            @RequestParam(required = false) Long participanteId) {
-
-        List<PremioAsignado> asignados;
-        if (participanteId != null) {
-            asignados = premioAsignadoService.findByParticipanteId(participanteId); // Requiere agregar en el Service
-        } else {
-            asignados = premioAsignadoService.findAll();
-        }
+    public ResponseEntity<List<PremioAsignado>> listarPremiosAsignados(@RequestParam(required = false) Long participanteId) {
+        List<PremioAsignado> asignados = (participanteId != null) ?
+                premioAsignadoService.findByParticipanteId(participanteId) : premioAsignadoService.findAll();
         return new ResponseEntity<>(asignados, HttpStatus.OK);
     }
 }

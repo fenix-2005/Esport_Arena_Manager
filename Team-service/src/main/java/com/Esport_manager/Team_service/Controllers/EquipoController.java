@@ -6,16 +6,20 @@ import com.Esport_manager.Team_service.Models.Dtos.EquipoDTO;
 import com.Esport_manager.Team_service.Models.Dtos.MiembroEquipoDTO;
 import com.Esport_manager.Team_service.Services.EquipoService;
 import com.Esport_manager.Team_service.Services.MiembroEquipoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/equipos")
+@Tag(name = "Clubes e Integrantes", description = "Endpoints para fundar escuadras, controlar altas, bajas y reasignaciones tácticas")
 public class EquipoController {
 
     @Autowired
@@ -24,23 +28,20 @@ public class EquipoController {
     @Autowired
     private MiembroEquipoService miembroService;
 
-
-    // 1. Crear equipo
+    @Operation(summary = "Fundar una nueva escuadra", description = "Crea un equipo asignándole nombre, juego base e indexando al fundador como su capitán oficial.")
     @PostMapping
     public ResponseEntity<Equipo> crearEquipo(@Valid @RequestBody EquipoDTO dto) {
         Equipo nuevoEquipo = equipoService.save(dto);
         return new ResponseEntity<>(nuevoEquipo, HttpStatus.CREATED);
     }
 
-    // 2. Listar equipos (Con filtros por juego, capitán o estado)
+    @Operation(summary = "Buscar y listar escuadras", description = "Obtiene los clubes creados con filtros jerárquicos por juego principal, capitán o estado.")
     @GetMapping
     public ResponseEntity<List<Equipo>> listarEquipos(
             @RequestParam(required = false) Long juegoPrincipalId,
             @RequestParam(required = false) Long capitanId,
             @RequestParam(required = false) String estado) {
-
         List<Equipo> equipos;
-
         if (juegoPrincipalId != null) {
             equipos = equipoService.findByJuegoPrincipalId(juegoPrincipalId);
         } else if (capitanId != null) {
@@ -50,61 +51,54 @@ public class EquipoController {
         } else {
             equipos = equipoService.findAll();
         }
-
         return new ResponseEntity<>(equipos, HttpStatus.OK);
     }
 
-    // 3. Buscar equipo por ID
+    @Operation(summary = "Obtener club por ID", description = "Muestra la ficha técnica e institucional de una escuadra.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Escuadra localizada de forma exitosa"),
+            @ApiResponse(responseCode = "404", description = "El ID ingresado no corresponde a ningún club")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Equipo> buscarEquipoPorId(@PathVariable Long id) {
         Equipo equipo = equipoService.findById(id);
-        if (equipo == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(equipo, HttpStatus.OK);
+        return (equipo == null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(equipo, HttpStatus.OK);
     }
 
-    // 4. Actualizar nombre, capitán o estado
+    @Operation(summary = "Actualizar directiva del club", description = "Modifica los metadatos institucionales del equipo, reasigna capitanías o cambia el estado corporativo.")
     @PutMapping("/{id}")
-    public ResponseEntity<Equipo> actualizarEquipo(
-            @PathVariable Long id,
-            @Valid @RequestBody EquipoDTO dto) {
+    public ResponseEntity<Equipo> actualizarEquipo(@PathVariable Long id, @Valid @RequestBody EquipoDTO dto) {
         Equipo equipoActualizado = equipoService.updateById(dto, id);
         return new ResponseEntity<>(equipoActualizado, HttpStatus.OK);
     }
 
-    // 5. Desactivar o Eliminar equipo
+    @Operation(summary = "Disolver escuadra competitiva", description = "Da de baja de forma total la escuadra eliminándola de los registros activos.")
+    @ApiResponse(responseCode = "204", description = "Club competitivo disuelto con éxito")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarEquipo(@PathVariable Long id) {
-        equipoService.deleteById(id); // O cambiar de estado a INACTIVO según implementes
+        equipoService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-
-    // 6. Agregar un miembro al equipo
+    @Operation(summary = "Inscribir jugador al roster", description = "Ficha a un usuario asignándole un rol táctico determinado dentro de la alineación de la escuadra.")
     @PostMapping("/{equipoId}/miembros")
-    public ResponseEntity<MiembroEquipo> agregarMiembro(
-            @PathVariable Long equipoId,
-            @Valid @RequestBody MiembroEquipoDTO dto) {
-
+    public ResponseEntity<MiembroEquipo> agregarMiembro(@PathVariable Long equipoId, @Valid @RequestBody MiembroEquipoDTO dto) {
         dto.setEquipoId(equipoId);
         MiembroEquipo nuevoMiembro = miembroService.save(dto);
         return new ResponseEntity<>(nuevoMiembro, HttpStatus.CREATED);
     }
 
-    // 7. Listar todos los miembros de un equipo
+    @Operation(summary = "Listar alineación activa del club", description = "Obtiene los perfiles y roles de los jugadores inscritos en la escuadra.")
     @GetMapping("/{equipoId}/miembros")
     public ResponseEntity<List<MiembroEquipo>> listarMiembrosDeEquipo(@PathVariable Long equipoId) {
         List<MiembroEquipo> miembros = miembroService.findByEquipoId(equipoId);
         return new ResponseEntity<>(miembros, HttpStatus.OK);
     }
 
-    // 8. Expulsar a un miembro del equipo
+    @Operation(summary = "Remover jugador de la alineación", description = "Saca a un competidor del roster oficial liberando su plaza en el club.")
+    @ApiResponse(responseCode = "204", description = "Jugador removido del roster operativo")
     @DeleteMapping("/{equipoId}/miembros/{usuarioId}")
-    public ResponseEntity<Void> expulsarMiembro(
-            @PathVariable Long equipoId,
-            @PathVariable Long usuarioId) {
-
+    public ResponseEntity<Void> expulsarMiembro(@PathVariable Long equipoId, @PathVariable Long usuarioId) {
         miembroService.eliminarPorEquipoYUsuario(equipoId, usuarioId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
