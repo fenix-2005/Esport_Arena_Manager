@@ -1,5 +1,6 @@
 package com.EsportManager.Registration_Service;
 
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -12,7 +13,10 @@ import io.swagger.v3.oas.annotations.info.Info;
 				title = "Registration Service API",
 				version = "1.0",
 				description = "Microservicio core encargado del procesamiento de postulaciones, validación distribuidas de cupos de torneo y flujos de aceptación."
-		)
+		),
+		servers = {
+				@Server(url = "http://localhost:8080", description = "API Gateway")
+		}
 )
 @EnableDiscoveryClient
 @EnableFeignClients

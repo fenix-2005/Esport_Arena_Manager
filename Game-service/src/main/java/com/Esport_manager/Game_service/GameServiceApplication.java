@@ -1,5 +1,6 @@
 package com.Esport_manager.Game_service;
 
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -11,7 +12,10 @@ import io.swagger.v3.oas.annotations.info.Info;
 				title = "Game Service API",
 				version = "1.0",
 				description = "Módulo encargado del catálogo oficial de videojuegos soportados, modalidades de juego y configuraciones por equipo."
-		)
+		),
+		servers = {
+				@Server(url = "http://localhost:8080", description = "API Gateway")
+		}
 )
 @EnableDiscoveryClient
 @SpringBootApplication

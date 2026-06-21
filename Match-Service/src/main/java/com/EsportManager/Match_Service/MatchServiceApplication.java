@@ -1,5 +1,6 @@
 package com.EsportManager.Match_Service;
 
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -11,7 +12,10 @@ import io.swagger.v3.oas.annotations.info.Info;
 				title = "Match Service API",
 				version = "1.0",
 				description = "Microservicio para la gestión de fixtures, programación de enfrentamientos en vivo y control de rondas competitivas."
-		)
+		),
+		servers = {
+				@Server(url = "http://localhost:8080", description = "API Gateway")
+		}
 )
 @EnableDiscoveryClient
 @SpringBootApplication
