@@ -18,6 +18,7 @@ services:
       - msvc-eureka
     networks:
       - esport-network
+    entrypoint: ["sh", "-c", "sleep 15 && java -jar app.jar"]
 
   auth-service:
     build: ./Auth-service
@@ -28,6 +29,7 @@ services:
       - msvc-eureka
     networks:
       - esport-network
+    entrypoint: ["sh", "-c", "sleep 15 && java -jar app.jar"]
 
   user-service:
     build: ./User-service
