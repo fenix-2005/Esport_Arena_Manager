@@ -1,143 +1,141 @@
-version: '3.8'
-
 services:
-  eureka-server:
-    build: ./eureka-server
-    container_name: eureka-server
+  msvc-eureka:
+    build: ./msvc-eureka
+    container_name: msvc-eureka
     ports:
       - "8761:8761"
     networks:
       - esport-network
 
-  api-gateway:
-    build: ./api-gateway
-    container_name: api-gateway
+  msvc-gateway:
+    build: ./msvc-gateway
+    container_name: msvc-gateway
     ports:
       - "8080:8080"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   auth-service:
-    build: ./auth-service
+    build: ./Auth-service
     container_name: auth-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   user-service:
-    build: ./user-service
+    build: ./User-service
     container_name: user-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   game-service:
-    build: ./game-service
+    build: ./Game-service
     container_name: game-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   team-service:
-    build: ./team-service
+    build: ./Team-service
     container_name: team-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   tournament-service:
-    build: ./tournament-service
+    build: ./Tournament-service
     container_name: tournament-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   registration-service:
-    build: ./registration-service
+    build: ./Registration-Service
     container_name: registration-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   match-service:
-    build: ./match-service
+    build: ./Match-Service
     container_name: match-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   result-service:
-    build: ./result-service
+    build: ./Result-Service
     container_name: result-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   sanction-service:
-    build: ./sanction-service
+    build: ./Sanction-Service
     container_name: sanction-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   ranking-service:
-    build: ./ranking-service
+    build: ./Ranking-Service
     container_name: ranking-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   prize-service:
-    build: ./prize-service
+    build: ./Prize-Service
     container_name: prize-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
   notification-service:
-    build: ./notification-service
+    build: ./Notification-Service
     container_name: notification-service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://msvc-eureka:8761/eureka/
     depends_on:
-      - eureka-server
+      - msvc-eureka
     networks:
       - esport-network
 
