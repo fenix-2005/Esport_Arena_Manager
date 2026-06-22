@@ -71,3 +71,43 @@ Si se dispone de Docker y Docker Compose instalados:
 2. Ejecutar el comando para construir las imágenes y levantar los contenedores:
    ```bash
    docker-compose up --build -d
+
+## ☁Despliegue en Producción (Servidor Linux / OCI)
+
+El ecosistema esta hecho para poder usar docker en un servidor, garantizando su portabilidad a cualquier servidor VPS (Oracle Linux 9, Ubuntu, etc.).
+
+### Requisitos en el Servidor
+- **Docker** (v24+) y **Docker Compose plugin**.
+- Tráfico habilitado en el Firewall (Ingress Rules) para los puertos de acceso público (ej. el puerto del API Gateway y SSH).
+
+### Pasos de Despliegue
+
+1. **Acceder al servidor mediante SSH:**
+   ```bash
+   ssh -i "ruta/a/tu/llave.key" opc@<IP_PUBLICA_DEL_SERVIDOR>
+   ```
+
+2. **Obtener el código fuente:**
+   ```bash
+   git clone [https://github.com/tu-usuario/Esport_Arena_Manager.git](https://github.com/tu-usuario/Esport_Arena_Manager.git)
+   cd Esport_Arena_Manager
+   ```
+
+3. **Construir y levantar la infraestructura:**
+   Ejecuta el orquestador en modo *detached* (segundo plano) para mantener los servicios vivos tras cerrar la sesión SSH:
+   ```bash
+   docker compose up --build -d
+   ```
+
+4. **Monitoreo y Verificación:**
+   Puedes revisar el estado de los contenedores y leer los registros en tiempo real:
+   ```bash
+   # Ver todos los microservicios en ejecución
+   docker ps
+
+   # Revisar los logs del servidor de descubrimiento (Eureka)
+   docker logs msvc-eureka
+   
+   # Revisar los logs del Gateway
+   docker logs msvc-gateway
+   ```
