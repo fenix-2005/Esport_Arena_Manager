@@ -87,19 +87,13 @@ El ecosistema esta hecho para poder usar docker en un servidor, garantizando su 
    ssh -i "ruta/a/tu/llave.key" opc@<IP_PUBLICA_DEL_SERVIDOR>
    ```
 
-2. **Obtener el código fuente:**
-   ```bash
-   git clone [https://github.com/tu-usuario/Esport_Arena_Manager.git](https://github.com/tu-usuario/Esport_Arena_Manager.git)
-   cd Esport_Arena_Manager
-   ```
-
-3. **Construir y levantar la infraestructura:**
+2**Construir y levantar la infraestructura:**
    Ejecuta el orquestador en modo *detached* (segundo plano) para mantener los servicios vivos tras cerrar la sesión SSH:
    ```bash
    docker compose up --build -d
    ```
 
-4. **Monitoreo y Verificación:**
+3**Monitoreo y Verificación:**
    Puedes revisar el estado de los contenedores y leer los registros en tiempo real:
    ```bash
    # Ver todos los microservicios en ejecución
@@ -108,6 +102,7 @@ El ecosistema esta hecho para poder usar docker en un servidor, garantizando su 
    # Revisar los logs del servidor de descubrimiento (Eureka)
    docker logs msvc-eureka
    
+  
    # Revisar los logs del Gateway
    docker logs msvc-gateway
    ```
