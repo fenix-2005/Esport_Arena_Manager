@@ -19,11 +19,11 @@ FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/* \
+    && groupadd -r app && useradd -r -g app app \
+    && mkdir -p /app/data \
+    && chown -R app:app /app
 
-RUN groupadd -r app && useradd -r -g app app
 
 COPY --from=build /app/app.jar app.jar
 
