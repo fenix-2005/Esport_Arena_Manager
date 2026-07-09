@@ -21,7 +21,7 @@
 
 1. **Eureka Server** (`8761`): Registro y descubrimiento de servicios.
 2. **API Gateway** (`8080`): Punto de entrada único y balanceo de carga.
-3. **Auth-service** (`8081`): Gestión de credenciales y seguridad.
+3. **Auth-service** : Gestión de credenciales y seguridad.
 4. **User-Service**: Perfiles, roles e información de competidores.
 5. **Team-Service**: Gestión de clubes, escuadras y roles tácticos.
 6. **Game-service**: Catálogo de videojuegos y modalidades.
@@ -70,7 +70,7 @@ Si se dispone de Docker y Docker Compose instalados:
 1. Abrir una terminal en la raíz del proyecto.
 2. Ejecutar el comando para construir las imágenes y levantar los contenedores:
    ```bash
-   docker-compose up --build -d
+   docker compose up -d --build
 
 ## ☁Despliegue en Producción (Servidor Linux / OCI)
 
@@ -90,7 +90,7 @@ El ecosistema esta hecho para poder usar docker en un servidor, garantizando su 
 2**Construir y levantar la infraestructura:**
    Ejecuta el orquestador en modo *detached* (segundo plano) para mantener los servicios vivos tras cerrar la sesión SSH:
    ```bash
-   docker compose up --build -d
+   docker compose up -d --build
    ```
 
 3**Monitoreo y Verificación:**
