@@ -1,0 +1,49 @@
+# ==========================
+# Maven / compilación local
+# ==========================
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Maven Wrapper (Usamos el mvn global de la imagen Docker)
+.mvn/
+mvnw
+mvnw.cmd
+
+# ==========================
+# Git
+# ==========================
+.git/
+.gitignore
+
+# ==========================
+# IDEs
+# ==========================
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# ==========================
+# Sistema operativo
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Propios de Docker y Documentación
+# ==========================
+Dockerfile
+.dockerignore
+*.md
+
+# ==========================
+# Seguridad (Opcional pero recomendado)
+# ==========================
+*.env
+.env
+*local*.yml
