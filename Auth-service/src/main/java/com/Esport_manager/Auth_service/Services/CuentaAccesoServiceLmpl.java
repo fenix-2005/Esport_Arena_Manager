@@ -6,6 +6,7 @@ import com.Esport_manager.Auth_service.Models.Dtos.CuentaAccesoDTO;
 import com.Esport_manager.Auth_service.Repositories.CuentaAccesoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +18,13 @@ public class CuentaAccesoServiceLmpl implements CuentaAccesoService {
     private CuentaAccesoRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<CuentaAcceso> findAll() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CuentaAcceso findById(Long id) {
         Optional<CuentaAcceso> optional = repository.findById(id);
         if (optional.isPresent()) {
@@ -31,6 +34,7 @@ public class CuentaAccesoServiceLmpl implements CuentaAccesoService {
     }
 
     @Override
+    @Transactional
     public CuentaAcceso save(CuentaAccesoDTO dto) {
         CuentaAcceso c = new CuentaAcceso();
         c.setEmail(dto.getEmail());
@@ -42,6 +46,7 @@ public class CuentaAccesoServiceLmpl implements CuentaAccesoService {
     }
 
     @Override
+    @Transactional
     public CuentaAcceso updateById(CuentaAccesoDTO dto, Long id) {
         Optional<CuentaAcceso> optional = repository.findById(id);
         if (optional.isPresent()) {
@@ -57,21 +62,25 @@ public class CuentaAccesoServiceLmpl implements CuentaAccesoService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CuentaAcceso> findByRol(String rol) {
         return repository.findByRol(rol);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CuentaAcceso> findByEstado(String estado) {
         return repository.findByEstado(estado);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CuentaAcceso findByEmail(String email) {
         Optional<CuentaAcceso> optional = repository.findByEmail(email);
         if (optional.isPresent()) {

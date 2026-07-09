@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class CuentaAccesoController {
             @ApiResponse(responseCode = "400", description = "Estructura de la petición o datos inválidos")
     })
     @PostMapping
-    public ResponseEntity<CuentaAcceso> crearCuenta(@RequestBody CuentaAccesoDTO dto) {
+    public ResponseEntity<CuentaAcceso> crearCuenta(@Valid @RequestBody CuentaAccesoDTO dto) {
         CuentaAcceso nuevaCuenta = cuentaAccesoService.save(dto);
         return new ResponseEntity<>(nuevaCuenta, HttpStatus.CREATED);
     }
@@ -68,7 +69,7 @@ public class CuentaAccesoController {
     @Operation(summary = "Actualizar datos de cuenta", description = "Modifica campos permitidos como contraseñas, roles asignados o estado operativo.")
     @ApiResponse(responseCode = "200", description = "Datos de acceso actualizados correctamente")
     @PutMapping("/{id}")
-    public ResponseEntity<CuentaAcceso> actualizarCuenta(@PathVariable Long id, @RequestBody CuentaAccesoDTO dto) {
+    public ResponseEntity<CuentaAcceso> actualizarCuenta(@PathVariable Long id, @Valid @RequestBody CuentaAccesoDTO dto) {
         CuentaAcceso cuentaActualizada = cuentaAccesoService.updateById(dto, id);
         return new ResponseEntity<>(cuentaActualizada, HttpStatus.OK);
     }

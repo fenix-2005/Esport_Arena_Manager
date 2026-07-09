@@ -5,6 +5,7 @@ import com.Esport_manager.User_service.Models.Dtos.UsuarioDTO;
 import com.Esport_manager.User_service.Repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +17,13 @@ public class UsuarioServiceLmpl implements UsuarioService {
     private UsuarioRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Usuario> findAll() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Usuario findById(Long id) {
         Optional<Usuario> optional = repository.findById(id);
         if (optional.isPresent()) {
@@ -30,6 +33,7 @@ public class UsuarioServiceLmpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public Usuario save(UsuarioDTO dto) {
         Usuario u = new Usuario();
         u.setNombre(dto.getNombre());
@@ -42,6 +46,7 @@ public class UsuarioServiceLmpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public Usuario updateById(UsuarioDTO dto, Long id) {
         Optional<Usuario> optional = repository.findById(id);
         if (optional.isPresent()) {
@@ -58,21 +63,25 @@ public class UsuarioServiceLmpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Usuario> findByRol(String rol) {
         return repository.findByRol(rol);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Usuario> findByEstado(String estado) {
         return repository.findByEstado(estado);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Usuario> findByNickname(String nickname) {
         return repository.findByNickname(nickname);
     }
