@@ -19,8 +19,9 @@ public class PartidaDTO {
     @NotNull(message = "El ID del participante B no puede ser nulo")
     private Long participanteBId;
 
+    @NotNull(message = "La ronda no puede ser nula")
     @Min(value = 1, message = "La ronda debe ser al menos 1")
-    private int ronda;
+    private Integer ronda;
 
     @NotNull(message = "La fecha y hora no pueden ser nulas")
     private LocalDateTime fechaHora;

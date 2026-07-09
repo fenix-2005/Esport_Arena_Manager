@@ -12,8 +12,9 @@ public class PremioDTO {
     @NotNull(message = "El ID del torneo no puede ser nulo")
     private Long torneoId;
 
+    @NotNull(message = "La posición no puede ser nula")
     @Min(value = 1, message = "La posición debe ser al menos 1")
-    private int posicion;
+    private Integer posicion;
 
     @NotBlank(message = "La descripción no puede estar vacía")
     private String descripcion;

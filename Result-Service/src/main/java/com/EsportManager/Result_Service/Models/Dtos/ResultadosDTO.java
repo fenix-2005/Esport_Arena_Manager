@@ -19,14 +19,17 @@ public class ResultadosDTO {
     @NotNull(message = "El ID del ganador no puede ser nulo")
     private Long ganadorId;
 
+    @NotNull(message = "El puntaje A no puede ser nulo")
     @Min(value = 0, message = "El puntaje A no puede ser negativo")
-    private int puntajeA;
+    private Integer puntajeA;
 
+    @NotNull(message = "El puntaje B no puede ser nulo")
     @Min(value = 0, message = "El puntaje B no puede ser negativo")
-    private int puntajeB;
+    private Integer puntajeB;
 
+    @NotNull(message = "El cupo máximo no puede ser nulo")
     @Min(value = 1, message = "El cupo máximo debe ser al menos 1")
-    private int cupoMaximo;
+    private Integer cupoMaximo;
 
     @NotBlank(message = "El estado de validación no puede estar vacío")
     private String estadoValidacion;

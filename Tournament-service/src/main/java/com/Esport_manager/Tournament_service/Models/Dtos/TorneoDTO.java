@@ -22,8 +22,9 @@ public class TorneoDTO {
     @NotNull(message = "La fecha de fin no puede ser nula")
     private LocalDate fechaFin;
 
+    @NotNull(message = "El cupo máximo no puede ser nulo")
     @Min(value = 2, message = "El cupo máximo debe ser al menos 2")
-    private int cupoMaximo;
+    private Integer cupoMaximo;
 
     @NotBlank(message = "El estado no puede estar vacío")
     private String estado;

@@ -15,18 +15,22 @@ public class RankingDTO {
     @NotNull(message = "El ID del participante no puede ser nulo")
     private Long participanteId;
 
-    @NotBlank(message = "Los puntos no pueden estar vacíos")
-    private String puntos;
+    @NotNull(message = "Los puntos no pueden ser nulos")
+    @Min(value = 0, message = "Los puntos no pueden ser negativos")
+    private Integer puntos;
 
-    @NotBlank(message = "Las victorias no pueden estar vacías")
-    private String victorias;
+    @NotNull(message = "Las victorias no pueden ser nulas")
+    @Min(value = 0, message = "Las victorias no pueden ser negativas")
+    private Integer victorias;
 
-    @NotBlank(message = "Las derrotas no pueden estar vacías")
-    private String derrotas;
+    @NotNull(message = "Las derrotas no pueden ser nulas")
+    @Min(value = 0, message = "Las derrotas no pueden ser negativas")
+    private Integer derrotas;
 
-    @NotBlank(message = "La diferencia no puede estar vacía")
-    private String diferencia;
+    @NotNull(message = "La diferencia no puede ser nula")
+    private Integer diferencia;
 
+    @NotNull(message = "La posición no puede ser nula")
     @Min(value = 1, message = "La posición debe ser al menos 1")
-    private int posicion;
+    private Integer posicion;
 }
