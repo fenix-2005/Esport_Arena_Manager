@@ -1,5 +1,7 @@
 package com.Esport_manager.Team_service.Services;
 
+import com.Esport_manager.Team_service.Clients.JuegoClient;
+import com.Esport_manager.Team_service.Clients.UsuarioClient;
 import com.Esport_manager.Team_service.Models.Equipo;
 import com.Esport_manager.Team_service.Models.Dtos.EquipoDTO;
 import com.Esport_manager.Team_service.Repositories.EquipoRepository;
@@ -14,6 +16,12 @@ public class EquipoServiceLmpl implements EquipoService {
 
     @Autowired
     private EquipoRepository repository;
+
+    @Autowired
+    private UsuarioClient usuarioClient;
+
+    @Autowired
+    private JuegoClient juegoClient;
 
     @Override
     public List<Equipo> findAll() {
@@ -31,6 +39,18 @@ public class EquipoServiceLmpl implements EquipoService {
 
     @Override
     public Equipo save(EquipoDTO dto) {
+        // Validar capitan y juego via Feign
+        try {
+            if (dto.getCapitanId() != null) {
+                usuarioClient.obtenerUsuarioPorId(dto.getCapitanId());
+            }
+            if (dto.getJuegoPrincipalId() != null) {
+                juegoClient.obtenerJuegoPorId(dto.getJuegoPrincipalId());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error de validación externa en Team-service: " + e.getMessage());
+        }
+
         Equipo e = new Equipo();
         e.setNombre(dto.getNombre());
         e.setCapitanId(dto.getCapitanId());

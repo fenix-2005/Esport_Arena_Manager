@@ -1,5 +1,7 @@
 package com.EsportManager.Match_Service.Services;
 
+import com.EsportManager.Match_Service.Clients.InscripcionClient;
+import com.EsportManager.Match_Service.Clients.TorneoClient;
 import com.EsportManager.Match_Service.Exceptions.PartidaNoEncontradaException;
 import com.EsportManager.Match_Service.Models.Partida;
 import com.EsportManager.Match_Service.Models.Dtos.PartidaDTO;
@@ -15,6 +17,12 @@ public class PartidaServiceLmpl implements PartidaService {
 
     @Autowired
     private PartidaRepository repository;
+
+    @Autowired
+    private TorneoClient torneoClient;
+
+    @Autowired
+    private InscripcionClient inscripcionClient;
 
     @Override
     public List<Partida> findAll() {
@@ -32,6 +40,28 @@ public class PartidaServiceLmpl implements PartidaService {
 
     @Override
     public Partida save(PartidaDTO dto) {
+        // Validar torneo e inscripciones via Feign
+        try {
+            if (dto.getTorneoId() != null) {
+                torneoClient.obtenerTorneoPorId(dto.getTorneoId());
+                
+                if (dto.getParticipanteAId() != null) {
+                    Boolean okA = inscripcionClient.verificarInscripcion(dto.getTorneoId(), dto.getParticipanteAId());
+                    if (okA == null || !okA) {
+                        throw new RuntimeException("Participante A no está inscrito en el torneo");
+                    }
+                }
+                if (dto.getParticipanteBId() != null) {
+                    Boolean okB = inscripcionClient.verificarInscripcion(dto.getTorneoId(), dto.getParticipanteBId());
+                    if (okB == null || !okB) {
+                        throw new RuntimeException("Participante B no está inscrito en el torneo");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error de validación externa en Match-service: " + e.getMessage());
+        }
+
         Partida p = new Partida();
         p.setTorneoId(dto.getTorneoId());
         p.setParticipanteAId(dto.getParticipanteAId());

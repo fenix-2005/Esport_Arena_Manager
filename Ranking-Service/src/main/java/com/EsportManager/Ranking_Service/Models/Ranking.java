@@ -32,23 +32,23 @@ public class Ranking {
 
     @NotNull(message = "Campo Puntos no puede estar vacio")
     @Column (name = "Puntos")
-    private String puntos;
+    private Integer puntos;
 
     @NotNull (message = "Campo  Victorias no puede estar vacio")
     @Column (name = "Victorias")
-    private String  victorias;
+    private Integer victorias;
 
     @NotNull (message = "Campo Derrotas no puede estar vacio")
     @Column (name = "Derrotas")
-    private String derrotas;
+    private Integer derrotas;
 
     @NotNull (message = "Campo Diferencia no puede estar vacio")
     @Column (name = "Diferencia")
-    private String diferencia;
+    private Integer diferencia;
 
     @NotNull (message = "Campo Posicion no puede estar vacio")
     @Column (name = "Posicion")
-    private int posicion;
+    private Integer posicion;
 
 
     @Embedded

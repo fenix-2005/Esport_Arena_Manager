@@ -34,17 +34,17 @@ public class Resultados {
     @Column (name = "Ganador_id")
     private Long ganadorId;
 
-    @NotNull(message = "Campo FechaInicio no puede estar vacio")
-    @Column (name = "Fecha_inicio")
-    private int puntajeA;
+    @NotNull(message = "Campo Puntaje A no puede estar vacio")
+    @Column (name = "Puntaje_A")
+    private Integer puntajeA;
 
-    @NotNull(message = "Campo FechaFin no puede estar vacio")
-    @Column (name = "Fecha_fin")
-    private int puntajeB;
+    @NotNull(message = "Campo Puntaje B no puede estar vacio")
+    @Column (name = "Puntaje_B")
+    private Integer puntajeB;
 
     @NotNull(message = "Campo CupoMaximo no puede estar vacio")
     @Column (name = "Cupo_maximo")
-    private int cupoMaximo;
+    private Integer cupoMaximo;
 
     @NotNull(message = "Campo EstadoValidacion no puede estar vacio")
     @Column (name = "Estado_validacion")

@@ -3,59 +3,58 @@ spring:
     name: msvc-gateway
   cloud:
     gateway:
-      server:
-        webmvc:
+      mvc:
           # Cada ruta: si la URL entra por el patron 'predicates', el gateway la reenvia
           # a 'uri'. lb:// significa "busca este nombre en Eureka y balancea la carga".
           routes:
             - id: Auth-service
               uri: lb://Auth-service
               predicates:
-                - Path=/api/v1/cuentas/**
+                - Path=/api/v1/cuentas/**,/api/v2/cuentas/**
             - id: Game-service
               uri: lb://Game-service
               predicates:
-                - Path=/api/v1/juegos/**
+                - Path=/api/v1/juegos/**,/api/v2/juegos/**
             - id: Match-Service
               uri: lb://Match-Service
               predicates:
-                - Path=/api/v1/partidas/**
+                - Path=/api/v1/partidas/**,/api/v2/partidas/**
             - id: Notification-Service
               uri: lb://Notification-Service
               predicates:
-                - Path=/api/v1/notificaciones/**
+                - Path=/api/v1/notificaciones/**,/api/v2/notificaciones/**
             - id: Prize-Service
               uri: lb://Prize-Service
               predicates:
-                - Path=/api/v1/premios/**
+                - Path=/api/v1/premios/**,/api/v2/premios/**
             - id: Ranking-Service
               uri: lb://Ranking-Service
               predicates:
-                - Path=/api/v1/rankings/**
+                - Path=/api/v1/rankings/**,/api/v2/rankings/**
             - id: Registration-Service
               uri: lb://Registration-Service
               predicates:
-                - Path=/api/v1/inscripciones/**
+                - Path=/api/v1/inscripciones/**,/api/v2/inscripciones/**
             - id: Result-Service
               uri: lb://Result-Service
               predicates:
-                - Path=/api/v1/resultados/**
+                - Path=/api/v1/resultados/**,/api/v2/resultados/**
             - id: Sanction-Service
               uri: lb://Sanction-Service
               predicates:
-                - Path=/api/v1/sanciones/**
+                - Path=/api/v1/sanciones/**,/api/v2/sanciones/**
             - id: Team-Service
               uri: lb://Team-Service
               predicates:
-                - Path=/api/v1/equipos/**
+                - Path=/api/v1/equipos/**,/api/v2/equipos/**
             - id: Tournament-Service
               uri: lb://Tournament-Service
               predicates:
-                - Path=/api/v1/torneos/**
+                - Path=/api/v1/torneos/**,/api/v2/torneos/**
             - id: User-Service
               uri: lb://User-Service
               predicates:
-                - Path=/api/v1/usuarios/**
+                - Path=/api/v1/usuarios/**,/api/v2/usuarios/**
 
             # Rutas para el OpenAPI (JSON) de cada microservicio. El Swagger UI del gateway
             # las consume. Usan el prefijo /api-docs/<svc> (NO /v3/api-docs) para no chocar con
@@ -178,3 +177,4 @@ springdoc:
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los 3 microservicios. El gateway la usa para validar.
 jwt:
   secret: clave-secreta-super-segura-para-jwt-hospital-msvc-duoc-2026-0616
+

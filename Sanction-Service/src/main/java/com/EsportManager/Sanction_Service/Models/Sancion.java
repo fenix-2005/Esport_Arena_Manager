@@ -22,11 +22,9 @@ public class Sancion {
     @Column(name="Id")
     private Long id;
 
-    @NotNull(message = "Campo UsuarioId no puede estar vacio")
     @Column (name = "Usuario_id")
     private Long usuarioId;
 
-    @NotNull (message = "Campo EquipoId no puede estar vacio")
     @Column (name = "Equipo_id")
     private Long equipoId;
 

@@ -1,5 +1,7 @@
 package com.EsportManager.Sanction_Service.Services;
 
+import com.EsportManager.Sanction_Service.Clients.EquipoClient;
+import com.EsportManager.Sanction_Service.Clients.UsuarioClient;
 import com.EsportManager.Sanction_Service.Exceptions.SancionNoEncontradaException;
 import com.EsportManager.Sanction_Service.Models.Sancion;
 import com.EsportManager.Sanction_Service.Models.Dtos.SancionDTO;
@@ -15,6 +17,12 @@ public class SancionServiceLmpl implements SancionService {
 
     @Autowired
     private SancionRepository repository;
+
+    @Autowired
+    private UsuarioClient usuarioClient;
+
+    @Autowired
+    private EquipoClient equipoClient;
 
     @Override
     public List<Sancion> findAll() {
@@ -32,6 +40,23 @@ public class SancionServiceLmpl implements SancionService {
 
     @Override
     public Sancion save(SancionDTO dto) {
+        // Validación lógica: Al menos usuarioId o equipoId deben estar presentes
+        if (dto.getUsuarioId() == null && dto.getEquipoId() == null) {
+            throw new RuntimeException("Debe proporcionar al menos un ID de usuario o un ID de equipo para la sanción");
+        }
+
+        // Validar usuario y equipo via Feign
+        try {
+            if (dto.getUsuarioId() != null) {
+                usuarioClient.obtenerUsuarioPorId(dto.getUsuarioId());
+            }
+            if (dto.getEquipoId() != null) {
+                equipoClient.obtenerEquipoPorId(dto.getEquipoId());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error de validación externa en Sanction-service: " + e.getMessage());
+        }
+
         Sancion s = new Sancion();
         s.setUsuarioId(dto.getUsuarioId());
         s.setEquipoId(dto.getEquipoId());

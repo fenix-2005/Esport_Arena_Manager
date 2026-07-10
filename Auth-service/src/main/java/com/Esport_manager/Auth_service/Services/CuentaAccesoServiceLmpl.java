@@ -1,8 +1,10 @@
 package com.Esport_manager.Auth_service.Services;
 
+import com.Esport_manager.Auth_service.Clients.UsuarioClient;
 import com.Esport_manager.Auth_service.Exceptions.CuentaNoEncontradaException;
 import com.Esport_manager.Auth_service.Models.CuentaAcceso;
 import com.Esport_manager.Auth_service.Models.Dtos.CuentaAccesoDTO;
+import com.Esport_manager.Auth_service.Models.Dtos.UsuarioDTO;
 import com.Esport_manager.Auth_service.Repositories.CuentaAccesoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class CuentaAccesoServiceLmpl implements CuentaAccesoService {
 
     @Autowired
     private CuentaAccesoRepository repository;
+
+    @Autowired
+    private UsuarioClient usuarioClient;
 
     @Override
     @Transactional(readOnly = true)
@@ -36,6 +41,16 @@ public class CuentaAccesoServiceLmpl implements CuentaAccesoService {
     @Override
     @Transactional
     public CuentaAcceso save(CuentaAccesoDTO dto) {
+        // Validar que el usuario existe en User-service antes de crear la cuenta
+        try {
+            UsuarioDTO usuario = usuarioClient.obtenerUsuarioPorEmail(dto.getEmail());
+            if (usuario == null) {
+                throw new CuentaNoEncontradaException("El usuario con email " + dto.getEmail() + " no existe en el sistema de usuarios");
+            }
+        } catch (Exception e) {
+            throw new CuentaNoEncontradaException("Error al validar el usuario en User-service: " + e.getMessage());
+        }
+
         CuentaAcceso c = new CuentaAcceso();
         c.setEmail(dto.getEmail());
         c.setPassword(dto.getPassword());

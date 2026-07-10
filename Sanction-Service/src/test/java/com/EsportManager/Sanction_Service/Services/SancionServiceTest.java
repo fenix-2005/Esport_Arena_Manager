@@ -1,5 +1,6 @@
 package com.EsportManager.Sanction_Service.Services;
 
+import com.EsportManager.Sanction_Service.Clients.UsuarioClient;
 import com.EsportManager.Sanction_Service.Exceptions.SancionNoEncontradaException;
 import com.EsportManager.Sanction_Service.Models.Dtos.SancionDTO;
 import com.EsportManager.Sanction_Service.Models.Sancion;
@@ -23,6 +24,9 @@ public class SancionServiceTest {
 
     @Mock
     private SancionRepository repository;
+
+    @Mock
+    private UsuarioClient usuarioClient;
 
     @InjectMocks
     private SancionServiceLmpl service;
@@ -56,6 +60,8 @@ public class SancionServiceTest {
     void save() {
         SancionDTO dto = new SancionDTO();
         Sancion sancion = new Sancion();
+
+        dto.setUsuarioId(1L);
 
         when(repository.save(any(Sancion.class))).thenReturn(sancion);
 

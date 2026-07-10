@@ -40,7 +40,7 @@ public class Torneo {
 
     @NotNull(message = "Campo CupoMaximo no puede estar vacio")
     @Column (name = "Cupo_maximo")
-    private int cupoMaximo;
+    private Integer cupoMaximo;
 
     @NotNull(message = "Campo Estado no puede estar vacio")
     @Column (name = "Estado")

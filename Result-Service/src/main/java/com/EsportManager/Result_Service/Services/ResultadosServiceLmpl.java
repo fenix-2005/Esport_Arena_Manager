@@ -1,5 +1,6 @@
 package com.EsportManager.Result_Service.Services;
 
+import com.EsportManager.Result_Service.Clients.PartidaClient;
 import com.EsportManager.Result_Service.Models.Dtos.ResultadosDTO;
 import com.EsportManager.Result_Service.Models.Resultados;
 import com.EsportManager.Result_Service.Repositories.ResultadosRepository;
@@ -14,6 +15,9 @@ public class ResultadosServiceLmpl implements ResultadosService {
 
     @Autowired
     private ResultadosRepository repository;
+
+    @Autowired
+    private PartidaClient partidaClient;
 
     @Override
     public List<Resultados> findAll() {
@@ -31,6 +35,15 @@ public class ResultadosServiceLmpl implements ResultadosService {
 
     @Override
     public Resultados save(ResultadosDTO dto) {
+        // Validar partida via Feign
+        try {
+            if (dto.getPartidaId() != null) {
+                partidaClient.obtenerPartidaPorId(dto.getPartidaId());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error de validación externa en Result-service: " + e.getMessage());
+        }
+
         Resultados r = new Resultados();
         r.setPartidaId(dto.getPartidaId());
         r.setTorneoId(dto.getTorneoId());

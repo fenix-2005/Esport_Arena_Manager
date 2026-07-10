@@ -1,5 +1,8 @@
 package com.EsportManager.Registration_Service.Services;
 
+import com.EsportManager.Registration_Service.Clients.EquipoClient;
+import com.EsportManager.Registration_Service.Clients.TorneoClient;
+import com.EsportManager.Registration_Service.Clients.UsuarioClient;
 import com.EsportManager.Registration_Service.Models.Dtos.InscripcionDTO;
 import com.EsportManager.Registration_Service.Models.Inscripcion;
 import com.EsportManager.Registration_Service.Repositories.InscripcionRepository;
@@ -14,6 +17,15 @@ public class InscripcionServiceLmpl implements InscripcionService {
 
     @Autowired
     private InscripcionRepository repository;
+
+    @Autowired
+    private TorneoClient torneoClient;
+
+    @Autowired
+    private EquipoClient equipoClient;
+
+    @Autowired
+    private UsuarioClient usuarioClient;
 
     @Override
     public List<Inscripcion> findAll() {
@@ -31,6 +43,22 @@ public class InscripcionServiceLmpl implements InscripcionService {
 
     @Override
     public Inscripcion save(InscripcionDTO dto) {
+        // Validaciones externas via Feign
+        try {
+            if (dto.getTorneoId() != null) {
+                torneoClient.obtenerTorneoPorId(dto.getTorneoId());
+            }
+            if (dto.getEquipoId() != null) {
+                equipoClient.obtenerEquipoPorId(dto.getEquipoId());
+            }
+            if (dto.getJugadorId() != null) {
+                usuarioClient.obtenerUsuarioPorId(dto.getJugadorId());
+            }
+        } catch (Exception e) {
+            // En un caso real, manejaríamos excepciones personalizadas o dejaríamos que Feign las propague
+            throw new RuntimeException("Error de validación externa: " + e.getMessage());
+        }
+
         Inscripcion i = new Inscripcion();
         i.setTorneoId(dto.getTorneoId());
         i.setEquipoId(dto.getEquipoId());

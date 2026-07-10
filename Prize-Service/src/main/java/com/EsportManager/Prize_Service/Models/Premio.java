@@ -28,7 +28,7 @@ public class Premio {
 
     @NotNull (message = "Campo Posicion no puede estar vacio")
     @Column (name = "Posicion")
-    private int posicion;
+    private Integer posicion;
 
     @NotNull(message = "Campo Descripcion no puede estar vacio")
     @Column (name = "Descripcion")

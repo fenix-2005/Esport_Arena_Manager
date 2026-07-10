@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @OpenAPIDefinition(
 		info = @Info(
@@ -17,6 +18,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 				@Server(url = "http://localhost:8080", description = "API Gateway")
 		}
 )
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class MatchServiceApplication {

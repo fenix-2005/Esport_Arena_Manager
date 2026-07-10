@@ -39,7 +39,7 @@ public class Partida {
 
     @NotNull(message = "Campo Ronda no puede estar vacio")
     @Column (name = "Ronda")
-    private int ronda;
+    private Integer ronda;
 
     @NotNull(message = "Campo Fecha_Hora no puede estar vacio")
     @Column (name = "Fecha_hora")

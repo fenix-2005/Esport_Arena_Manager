@@ -1,5 +1,6 @@
 package com.EsportManager.Ranking_Service.Services;
 
+import com.EsportManager.Ranking_Service.Clients.TorneoClient;
 import com.EsportManager.Ranking_Service.Exceptions.RankingNoEncontradoException;
 import com.EsportManager.Ranking_Service.Models.Ranking;
 import com.EsportManager.Ranking_Service.Models.Dtos.RankingDTO;
@@ -15,6 +16,9 @@ public class RankingServiceLmpl implements RankingService {
 
     @Autowired
     private RankingRepository repository;
+
+    @Autowired
+    private TorneoClient torneoClient;
 
     @Override
     public List<Ranking> findAll() {
@@ -32,6 +36,15 @@ public class RankingServiceLmpl implements RankingService {
 
     @Override
     public Ranking save(RankingDTO dto) {
+        // Validar torneo via Feign
+        try {
+            if (dto.getTorneoId() != null) {
+                torneoClient.obtenerTorneoPorId(dto.getTorneoId());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error de validación externa en Ranking-service: " + e.getMessage());
+        }
+
         Ranking r = new Ranking();
         r.setTorneoId(dto.getTorneoId());
         r.setParticipanteId(dto.getParticipanteId());

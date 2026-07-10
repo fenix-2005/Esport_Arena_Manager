@@ -4,7 +4,7 @@ import com.EsportManager.Notification_Service.Exceptions.NotificacionNoEncontrad
 import com.EsportManager.Notification_Service.Models.Dtos.NotificacionDTO;
 import com.EsportManager.Notification_Service.Models.Notificacion;
 import com.EsportManager.Notification_Service.Repositories.NotificacionRepository;
-import org.jspecify.annotations.NonNull;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class NotificacionServiceLmpl implements NotificacionService {
     }
 
     @Override
-    public Notificacion save(@NonNull NotificacionDTO dto) {
+    public Notificacion save(@NotNull NotificacionDTO dto) {
         Notificacion n = new Notificacion();
         n.setUsuarioId(dto.getUserId());
         n.setEquipoId(dto.getEquipoId());

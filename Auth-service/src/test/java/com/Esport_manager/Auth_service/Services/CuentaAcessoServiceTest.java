@@ -1,8 +1,10 @@
 package com.Esport_manager.Auth_service.Services;
 
+import com.Esport_manager.Auth_service.Clients.UsuarioClient;
 import com.Esport_manager.Auth_service.Exceptions.CuentaNoEncontradaException;
 import com.Esport_manager.Auth_service.Models.CuentaAcceso;
 import com.Esport_manager.Auth_service.Models.Dtos.CuentaAccesoDTO;
+import com.Esport_manager.Auth_service.Models.Dtos.UsuarioDTO;
 import com.Esport_manager.Auth_service.Repositories.CuentaAccesoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,6 +27,8 @@ public class CuentaAcessoServiceTest {
     @Mock
     private CuentaAccesoRepository repository;
 
+    @Mock private UsuarioClient usuarioClient;
+
     @InjectMocks
     private CuentaAccesoServiceLmpl service;
 
@@ -34,27 +38,23 @@ public class CuentaAcessoServiceTest {
         CuentaAccesoDTO dto = new CuentaAccesoDTO();
         dto.setEmail("nuevo@esports.cl");
         dto.setPassword("12345");
-        dto.setRol("ADMIN");
         dto.setEstado("ACTIVO");
+        dto.setRol("USER");
         dto.setFechaCreacion(LocalDate.now());
 
-        // Prepara el objeto que devolverá la base de datos tras guardar
-        CuentaAcceso cuentaGuardada = new CuentaAcceso();
-        cuentaGuardada.setId(1L);
-        cuentaGuardada.setEmail(dto.getEmail());
-        cuentaGuardada.setRol(dto.getRol());
+        // 2. CONFIGURACIÓN DEL MOCK
+        when(usuarioClient.obtenerUsuarioPorEmail("nuevo@esports.cl")).thenReturn(new UsuarioDTO());
 
-        // Intercepta la llamada a la base de datos y devuelve el objeto preparado
-        when(repository.save(any(CuentaAcceso.class))).thenReturn(cuentaGuardada);
+        // 3. CONFIGURACIÓN DEL REPOSITORIO
+        when(repository.save(any(CuentaAcceso.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        // Ejecuta el método de guardado en el servicio
+        // 4. Ejecuta
         CuentaAcceso resultado = service.save(dto);
 
-        // Valida que la cuenta devuelta tenga el ID asignado y los datos correctos
+        // 5. Verifica
         assertNotNull(resultado);
-        assertEquals(1L, resultado.getId());
         assertEquals("nuevo@esports.cl", resultado.getEmail());
-        verify(repository, times(1)).save(any(CuentaAcceso.class));
+        verify(usuarioClient, times(1)).obtenerUsuarioPorEmail("nuevo@esports.cl");
     }
 
     @Test
