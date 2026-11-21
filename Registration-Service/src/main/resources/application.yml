@@ -20,6 +20,13 @@ spring:
         hibernate:
             ddl-auto: update
 
+app:
+  cors:
+    origenes: ${CORS_ORIGENES:http://localhost:5173}
+  jwt:
+    secreto: ${JWT_SECRETO:JWT_SECRETO:THE-ICE-KEY-OF-ESPORT-ARENA-MANAGER}
+    duracion-ms: 3600000
+
 springdoc:
   api-docs:
     enabled: true
