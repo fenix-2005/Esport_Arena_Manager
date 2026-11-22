@@ -1,6 +1,6 @@
 package com.Esport_manager.Auth_service.Controllers;
 
-import com.Esport_manager.Auth_service.Models.CuentaAcceso;
+
 import com.Esport_manager.Auth_service.Repositories.CuentaAccesoRepository;
 import com.Esport_manager.Auth_service.Security.JwtServicio;
 import io.swagger.v3.oas.annotations.Operation;

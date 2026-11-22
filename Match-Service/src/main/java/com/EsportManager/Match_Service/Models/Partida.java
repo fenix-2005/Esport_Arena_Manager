@@ -5,11 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.apache.logging.log4j.message.Message;
-
 import java.time.LocalDateTime;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Entity
 @Table (name = "Partida")
