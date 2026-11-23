@@ -1,7 +1,6 @@
 package com.EsportManager.Prize_Service.Repositories;
 
 import com.EsportManager.Prize_Service.Models.Premio;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -3,9 +3,6 @@
 ##  Contexto y Dominio del Proyecto
 **Esport Manager** es una plataforma integral de gestión de torneos y competiciones de deportes electrónicos (Esports). El sistema está diseñado bajo una arquitectura distribuida de microservicios robusta y escalable. Permite a organizadores, jugadores y equipos administrar todo el ciclo de vida competitivo: desde la configuración de videojuegos y torneos, pasando por la inscripción de escuadras y el emparejamiento (fixtures), hasta el registro de resultados, cálculo automatizado de rankings, adjudicación de premios y la aplicación de sanciones disciplinarias.
 
-##  Integrantes del Equipo
-* Javier Guzmán
-* Bastian Figueroa
 
 ## Arquitectura y Tecnologías
 * **Backend:** Java 17+, Spring Boot 3.x
@@ -15,7 +12,7 @@
 * **Enrutamiento:** Spring Cloud Gateway
 * **Documentación API:** SpringDoc OpenAPI (Swagger)
 * **Testing:** JUnit 5, Mockito, JaCoCo (Cobertura > 80%)
-* **Base de Datos:** H2 Database (In-Memory para desarrollo)
+*
 
 ## Listado de Microservicios Implementados
 
