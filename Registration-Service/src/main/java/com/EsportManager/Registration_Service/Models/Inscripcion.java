@@ -14,40 +14,43 @@ import java.time.LocalDate;
 @Setter
 @NamedEntityGraph
 @ToString
-
 public class Inscripcion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="Id")
+    @Column(name = "Id")
     private Long id;
 
     @NotNull(message = "Campo TorneoId no puede estar vacio")
-    @Column (name = "Torneo_id")
+    @Column(name = "Torneo_id")
     private Long torneoId;
 
-    @NotNull (message = "Campo EquipoId no puede estar vacio")
-    @Column (name = "Equipo_id")
+    @Column(name = "Equipo_id")
     private Long equipoId;
 
-    @NotNull(message = "Campo JugadorId no puede estar vacio")
-    @Column (name = "Jugador_id")
+    @Column(name = "Jugador_id")
     private Long jugadorId;
 
+    @NotNull(message = "Campo TipoParticipante no puede estar vacio")
+    @Column(name = "Tipo_participante")
+    private String tipoParticipante;
 
-    @NotNull (message = "Campo  TipoParticipante no puede estar vacio")
-    @Column (name = "Tipo_participante")
-    private String  tipoParticipante;
-
-    @NotNull (message = "Campo Estado no puede estar vacio")
-    @Column (name = "Estado")
+    @Column(name = "Estado")
     private String estado;
 
-    @NotNull (message = "Campo  FechaInscripcion no puede estar vacio")
-    @Column (name = " Fecha_inscripcion")
-    private LocalDate  fechaInscripcion;
-
+    @Column(name = " Fecha_inscripcion")
+    private LocalDate fechaInscripcion;
 
     @Embedded
     Audit audit = new Audit();
+
+    @PrePersist
+    public void prePersist() {
+        if (this.estado == null || this.estado.isBlank()) {
+            this.estado = "CONFIRMADA";
+        }
+        if (this.fechaInscripcion == null) {
+            this.fechaInscripcion = LocalDate.now();
+        }
+    }
 }
